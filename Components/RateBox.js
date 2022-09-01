@@ -88,10 +88,10 @@ export default RateBox = (props) => {
 
     return(
         <View style = {{'width' : '100%','height' : '100%', 'justifyContent' : 'center', 'alignItems' : 'center'}}>
-        <View style = {{'backgroundColor' : 'black', width:'80%', 'height' : '30%'}}>
-            <View style={{'width':'100%', 'height' : '40%', 'paddingTop' : '3%'}}>
-                <Text style={{color:"white", textAlign:'center', fontSize : 20, fontWeight : 'bold'}}>{props.albumItem['album']}</Text>
-                <Text style={{color:"white", textAlign:'center', fontSize : 14}}>{props.albumItem['artist']}</Text>
+        <View style = {{'backgroundColor' : 'black', width:300, 'height' : 175}}>
+            <View style={{'width':'100%', 'height' : 50, 'paddingTop' : '3%'}}>
+                <Text numberOfLines={1} style={{color:"white", textAlign:'center', fontSize : 20, fontWeight : 'bold'}}>{props.albumItem['album']}</Text>
+                <Text numberOfLines={1} style={{color:"white", textAlign:'center', fontSize : 14}}>{props.albumItem['artist']}</Text>
             </View>
             <View style={{'height' : '30%', 'width':'100%', 'justifyContent':'center', 'alignItems':'center'}}>
                 <View style={{'width' : '70%'}}>
@@ -103,9 +103,9 @@ export default RateBox = (props) => {
                     </View>
                 </View>
             </View>
-            <View style={{'flexDirection' : 'row', 'justifyContent' : 'center', 'height' : '30%', 'width' : '100%'}}>
+            <View style={{'flexDirection' : 'row', 'justifyContent' : 'center', 'height' : 75, 'width' : '100%'}}>
                 <View style={[{justifyContent : 'center', 'alignItems' : 'center' }, props.albumItem['rating'] == null ? {"width":'50%'} : {"width":'30%'}]}>
-                    <TouchableOpacity onPress={props.close} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : '80%', 'backgroundColor' : 'red' }}>
+                    <TouchableOpacity onPress={props.close} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : 50, 'backgroundColor' : 'red' }}>
                         <View>
                             <Text style={{color:"white"}}>Cancel</Text>
                         </View>
@@ -113,7 +113,7 @@ export default RateBox = (props) => {
                 </View>
                 {props.albumItem['rating'] != null ? 
                    <View style={[{justifyContent : 'center', 'alignItems' : 'center' }, props.albumItem['rating'] == null ? {"width":'50%'} : {"width":'30%'}]}>
-                   <TouchableOpacity onPress={removeRating} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : '80%', 'backgroundColor' : 'green' }}>
+                   <TouchableOpacity onPress={removeRating} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : 50, 'backgroundColor' : 'green' }}>
                        <View>                     
                            <Text style={{color:"white"}}>Remove</Text>
                        </View>
@@ -121,7 +121,7 @@ export default RateBox = (props) => {
                </View>
                 : null}
                 <View style={[{justifyContent : 'center', 'alignItems' : 'center' }, props.albumItem['rating'] == null ? {"width":'50%'} : {"width":'30%'}]}>
-                    <TouchableOpacity onPress={saveRating} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : '80%', 'backgroundColor' : 'blue' }}>
+                    <TouchableOpacity onPress={saveRating} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : 50, 'backgroundColor' : 'blue' }}>
                         <View>                     
                             <Text style={{color:"white"}}>Rate</Text>
                         </View>

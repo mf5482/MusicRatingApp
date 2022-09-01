@@ -4,13 +4,14 @@ export default StyleSheet.create({
 
     buttons : {
         'marginTop' : '5%',
+        'marginBottom' : 20,
         'alignItems' : 'center',
         'height' : '90%',
         'width':'100%'
     },
 
     button : {
-        height : '10%',
+        height : 50,
         width: '90%',
         'borderRadius' : 5,
         'backgroundColor' : 'gray',
@@ -20,7 +21,7 @@ export default StyleSheet.create({
     },
 
     hasPlaylistButton : {
-        height : '10%',
+        height : 50,
         width: '90%',
         'borderRadius' : 5,
         'backgroundColor' : 'green',

@@ -38,8 +38,8 @@ const RecycleTestComponent = (props) => {
                 <Image style={{aspectRatio: 1/1, height:'165%'}} source={item.cover_image != '' ? {uri:item.cover_image} : require('../assets/blankCD.jpeg')} />
             </View>
             <View style={{width:"65%"}}>
-                <Text style={{color:'white'}}>{title}</Text>
-                <Text style={{color: 'gray'}}>{artist}</Text>
+                <Text numberOfLines={2} style={{color:'white'}}>{title}</Text>
+                <Text numberOfLines={2} style={{color: 'gray'}}>{artist}</Text>
             </View>
     </TouchableOpacity>
    );

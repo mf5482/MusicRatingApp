@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import {FlatList, View, Image, Text, TouchableOpacity} from 'react-native'
-import { useNavigation } from '@react-navigation/native';
-import AlbumInfoScreen from '../Screens/AlbumInfoScreen.js'
 
 
 
@@ -30,7 +28,7 @@ export default HorizontalAlbumList = (props) => {
 
     console.group(props.data.length)
     return(
-        <View style={[{'height':175, 'backgroundColor' : '#444444'},props.style]}>
+        <View style={[{'height':185, 'backgroundColor' : '#444444'},props.style]}>
         {props.data.length > 0 ? <FlatList horizontal={true} data={props.data}
         renderItem={(item) => showAlbum(item.item)}
         keyExtractor={item => item.MasterId}/> : 
