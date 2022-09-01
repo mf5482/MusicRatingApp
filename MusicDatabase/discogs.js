@@ -1,15 +1,13 @@
 import axios from 'axios'
 
-const DISCOGS_APIKEY = 'cpYMvFmSknPMXpdMZiGEbcnuqnMbMoZYillwcdHA'
-
 export const searchAlbum_Discogs = (artist, albumName) => {
 
-    return get(`https://api.discogs.com/database/search?token=${DISCOGS_APIKEY}&query=${artist + ' ' + albumName}`)
+    return get(`https://api.discogs.com/database/search?token=${config.DISCOGS_APIKEY}&query=${artist + ' ' + albumName}`)
    
 }
 
 export const getAlbum_Discogs = (masterId) => {
-    return get(`https://api.discogs.com/masters/${masterId}?token=${DISCOGS_APIKEY}`)
+    return get(`https://api.discogs.com/masters/${masterId}?token=${config.DISCOGS_APIKEY}`)
 }
 
 export const get = (url) => {
@@ -18,6 +16,6 @@ export const get = (url) => {
 
 export const searchDiscogs = (searchTerm) => {
 
-    return get(`https://api.discogs.com/database/search?token=${DISCOGS_APIKEY}&type=master&query=${searchTerm}`)
+    return get(`https://api.discogs.com/database/search?token=${config.DISCOGS_APIKEY}&type=master&query=${searchTerm}`)
 
 }
