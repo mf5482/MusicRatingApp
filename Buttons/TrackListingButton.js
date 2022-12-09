@@ -13,3 +13,5 @@ export default TrackListingButton = (props) => {
     )
 }
 
+//                <Text style={{color:'white', 'textAlign' : 'center'}}>Track Listing</Text>
+//ButtonText

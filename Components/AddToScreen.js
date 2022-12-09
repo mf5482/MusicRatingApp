@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text,FlatList} from 'react-native'
+import {View, Modal,Button,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView} from 'react-native'
 import { getPlaylists, addToPlaylist } from "../SQLite/sql.js";
 import PlaylistListStyle from "../Styles/PlaylistList.style.js";
 import RemoveButton from "../Buttons/RemoveButton.js";
@@ -50,13 +50,24 @@ export default addToScreen = ((props) => {
     })
 
     return (
-        <View style={{"justifyContent": "flex-end", backgroundColor: 'rgba(0,0,0,0.5)', "height":"100%"}}>
-            <View style={{ "backgroundColor":"black"}}>
+        <SafeAreaView style={{height:"100%"}}>
+            <TouchableWithoutFeedback  onPress={props.close}>
+                <View style={{flex:1, backgroundColor:"rgba(0,0,0,0.5)"}}></View>
+            </TouchableWithoutFeedback>
+            <View style={{ backgroundColor:"black"}}>
                 <FlatList data={playlists} keyExtractor={(item) => item.ID }
             renderItem={playlistItem} />
             {props.albumItem['playlistId'] != null ? <RemoveButton masterId = {props.albumItem['masterId']} returnPlaylistID={props.returnPlaylistID} close={props.close}/> : null}           
             <Button title="Close" onPress={props.close} />
             </View>
-        </View>
+        </SafeAreaView>
     )
 })
+
+//<SafeAreaView style={{height:"100%"}}>
+//AddToScreenContainer
+//           <View style={{flex:1, backgroundColor:"rgba(0,0,0,0.5)"}}></View>
+//BackgroundDim
+//               <View style={{ backgroundColor:"black"}}>
+
+//List color

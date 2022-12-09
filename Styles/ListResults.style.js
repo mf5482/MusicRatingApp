@@ -1,9 +1,17 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    albumItem:{
-        "display" : "flex",
+    touchable:{
         height : 90,
-        "flexDirection" : 'row'
-        }
+        width:"100%",
+        backgroundColor:"black"
+    },
+    albumItem:{
+        display : "flex",
+        height : 90,
+        width:"100%",
+        flexDirection : "row",
+        justifyContent : "center",
+        marginTop:7,
+    }
 })

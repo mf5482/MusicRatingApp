@@ -4,7 +4,7 @@ import styles from '../Styles/albumInfoScreen.style.js'
 
 import { getAlbumInfo_LastFM } from '../MusicDatabase/lastfm.js'
 import { searchAlbum_Discogs } from '../MusicDatabase/discogs.js'
-import { executeSQL, addAlbum, getAlbumPlaylist, getPlaylistName, getAlbumRating } from '../SQLite/sql.js'
+import {getAlbumPlaylist, getPlaylistName, getAlbumRating } from '../SQLite/sql.js'
 import AddToButton from '../Buttons/AddToButton.js'
 import RatingButton from '../Buttons/RateButton.js'
 import TrackListingButton from '../Buttons/TrackListingButton.js'

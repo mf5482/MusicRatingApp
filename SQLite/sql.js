@@ -11,10 +11,10 @@ export const getDBConnection = async () => {
 export const createTable = async () => {
   db.transaction(tx => {
     /*tx.executeSql('DROP TABLE Playlists'),
-    tx.executeSql('DROP TABLE Albums'),*/
+    tx.executeSql('DROP TABLE Albums'), */
     tx.executeSql('CREATE TABLE IF NOT EXISTS Playlists ("Name" TEXT, "DateCreated" TEXT, "LastEditDate" TEXT, "ID" INTEGER PRIMARY KEY)'),
-    tx.executeSql('CREATE TABLE IF NOT EXISTS Albums ("MasterId" INT, "Album"	TEXT, "Artist"	TEXT, "Year"	INTEGER, "Genre"	TEXT, "CoverArt" TEXT, "Rating" NUMERIC, "PlaylistId" INT, PRIMARY KEY("MasterId"))'),
-    tx.executeSql('INSERT OR IGNORE INTO Playlists (rowid, Name, DateCreated) VALUES (1,"Listen To", datetime("now", "localtime")), (2,"Wishlist", datetime("now", "localtime")), (3,"Owned", datetime("now", "localtime")), (4,"Discard Pile", datetime("now", "localtime"))')
+    tx.executeSql('CREATE TABLE IF NOT EXISTS Albums ("master_id" INT, "title"	TEXT, "artist"	TEXT, "year"	INTEGER, "genre"	TEXT, "cover_image" TEXT, "rating" NUMERIC, "playlistId" INT, PRIMARY KEY("master_id"))'),
+    tx.executeSql('INSERT OR IGNORE INTO Playlists (rowid, Name, DateCreated) VALUES (1,"Listen To", datetime("now", "localtime")), (2,"Relisten", datetime("now", "localtime")), (3,"Wishlist", datetime("now", "localtime")), (4,"Owned", datetime("now", "localtime")), (5,"Discard Pile", datetime("now", "localtime"))')
   })
 
 }
@@ -29,25 +29,27 @@ export const getDB = async() => {
   })
 } */
 
-export const executeSQL = () => {
+/*export const executeSQL = () => {
   db.transaction(tx => {
     tx.executeSql('SELECT * FROM Albums', null, // passing sql query and parameters:null
       // success callback which sends two things Transaction object and ResultSet Object
       (txObj, { rows: { _array } }) => {
-        console.log(_array)
       },
       // failure callback which sends two things Transaction object and Error
       (txObj, error) => console.log('Error ', error)
       ) // end executeSQL
   }) // end transaction
-}
+}*/
 
-export const getAlbums = (setAlbumsFunction) => {
+export const getAlbums = (setAlbumsFunction, playlistId, rating, random, sortBy) => {
   return new Promise((resolve, reject) => {
+
+    var query = `SELECT * FROM Albums WHERE ${playlistId !== undefined ? `playlistId = "${playlistId}"` : ''}${playlistId !== undefined && rating !== undefined ? ` AND ` : ''}
+    ${rating !== undefined ? `rating = "${rating}"` : ''}${random === true ? 'ORDER BY RANDOM() Limit 10' : ''}${sortBy !== undefined && sortBy !== null ? `ORDER BY ${sortBy} ASC`:''}`
 
  
   db.transaction(tx => {
-    tx.executeSql('SELECT * FROM Albums WHERE PlaylistId = "1" ORDER BY RANDOM() Limit 10', null, // passing sql query and parameters:null
+    tx.executeSql(query, null, // passing sql query and parameters:null
       // success callback which sends two things Transaction object and ResultSet Object
       (txObj, { rows: { _array } }) => {
         setAlbumsFunction(_array)
@@ -81,12 +83,13 @@ export const addToPlaylist = (task, albumItem) => {
 
   return new Promise((resolve, reject) => {
 
-
     var x
     if(task === 'INSERT'){
-      x = `INSERT INTO Albums (MasterId, Album, Artist, Year, CoverArt, Genre, PlaylistId) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, "${albumItem.coverArt}", '${albumItem.genre.replaceAll("'", "''")}', ${albumItem.playlistId})`
+      x = `INSERT INTO Albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replace(/'/g,"''")}','${albumItem.artist.replace(/'/g,"''")}', ${albumItem.year}, "${albumItem.coverArt}", '${albumItem.genre.replace(/'/g,"''")}', ${albumItem.playlistId}, null)`
+      //x = `INSERT INTO Albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, "${albumItem.coverArt}", '${albumItem.genre.replaceAll("'", "''")}', ${albumItem.playlistId}, null)`
     }else if(task === 'UPDATE'){
-      x = `UPDATE Albums SET PlaylistId = ${albumItem.playlistId} WHERE Album = '${albumItem.album.replaceAll("'", "''")}' AND Artist = '${albumItem.artist.replaceAll("'", "''")}'`
+      x = `UPDATE Albums SET playlistId = ${albumItem.playlistId} WHERE title = '${albumItem.album.replace(/'/g,"''")}' AND artist = '${albumItem.artist.replace(/'/g,"''")}'`
+      //x = `UPDATE Albums SET playlistId = ${albumItem.playlistId} WHERE title = '${albumItem.album.replaceAll("'", "''")}' AND artist = '${albumItem.artist.replaceAll("'", "''")}'`
     }else{
       return reject()
     }
@@ -110,7 +113,7 @@ export const addToPlaylist = (task, albumItem) => {
 export const getAlbumPlaylist = (masterId, idFunction, nameFunction) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
-      tx.executeSql(`SELECT p.ID, p.Name FROM Albums pm INNER JOIN Playlists p ON pm.PlaylistId = p.ID WHERE pm.MasterId = ${masterId}`, null,
+      tx.executeSql(`SELECT p.ID, p.Name FROM Albums pm INNER JOIN Playlists p ON pm.playlistId = p.ID WHERE pm.master_id = ${masterId}`, null,
       (txObj, {rows: {_array}}) => {
         if(_array.length != 0){
           idFunction(_array[0].ID)
@@ -147,7 +150,7 @@ export const removeAlbum = (masterId) => {
   return new Promise((resolve, reject) => {
 
   db.transaction(tx => {
-    tx.executeSql(`UPDATE Albums SET PlaylistId = null WHERE MasterId = ${masterId}`, null, 
+    tx.executeSql(`UPDATE Albums SET playlistId = null WHERE master_id = ${masterId}`, null, 
     (txObj) => {
     },
     // failure callback which sends two things Transaction object and Error
@@ -156,7 +159,7 @@ export const removeAlbum = (masterId) => {
       return reject()
     }
     ),
-    tx.executeSql(`DELETE FROM Albums WHERE MasterId = ${masterId} AND Rating is null`, null, 
+    tx.executeSql(`DELETE FROM Albums WHERE master_id = ${masterId} AND rating is null`, null, 
 
     (txObj) => {
       return resolve()
@@ -176,10 +179,10 @@ export const removeAlbum = (masterId) => {
 export const getAlbumRating = (masterId, setAlbumRating) => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
-      tx.executeSql(`SELECT Rating FROM Albums a WHERE a.MasterId = ${masterId}`, null,
+      tx.executeSql(`SELECT rating FROM Albums a WHERE a.master_id = ${masterId}`, null,
       (txObj, {rows: {_array}}) => {
         if(_array.length != 0){
-          setAlbumRating(_array[0].Rating)
+          setAlbumRating(_array[0].rating)
           return resolve()
         }
       }, (txObj, error) => {
@@ -193,17 +196,16 @@ export const getAlbumRating = (masterId, setAlbumRating) => {
 export const saveAlbumRating = (task, albumItem) => {
   return new Promise((resolve, reject) => {
 
-    console.log('Here')
     var x
     if(task === 'INSERT'){
-      x = `INSERT INTO Albums (MasterId, Album, Artist, Year, CoverArt, Genre, Rating) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replaceAll("'", "''")}', ${albumItem.rating})`
+      x = `INSERT INTO Albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replace(/'/g,"''")}','${albumItem.artist.replace(/'/g,"''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replace(/'/g,"''")}', null, ${albumItem.rating})`
+      //x = `INSERT INTO Albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replaceAll("'", "''")}', null, ${albumItem.rating})`
     }else if(task === 'UPDATE'){
-      x = `UPDATE Albums SET Rating = ${albumItem.rating} WHERE MasterId = ${albumItem.masterId}`
+      x = `UPDATE Albums SET rating = ${albumItem.rating} WHERE master_id = ${albumItem.masterId}`
     }else{
       return reject()
     }
 
-    console.log('HERE')
     db.transaction(tx => {
       tx.executeSql(queryRating(task, albumItem), null, // passing sql query and parameters:null
         // success callback which sends two things Transaction object and ResultSet Object
@@ -222,7 +224,7 @@ export const saveAlbumRating = (task, albumItem) => {
 export const removeAlbumRating = (masterId) => {
 return new Promise((resolve, reject) => {
   db.transaction(tx => {
-    tx.executeSql(`UPDATE Albums SET Rating = null WHERE MasterId = ${masterId}`, null, 
+    tx.executeSql(`UPDATE Albums SET rating = null WHERE master_id = ${masterId}`, null, 
     (txObj) => {
     },
     // failure callback which sends two things Transaction object and Error
@@ -231,7 +233,7 @@ return new Promise((resolve, reject) => {
       return reject()
     }
     ),
-    tx.executeSql(`DELETE FROM Albums WHERE MasterId = ${masterId} AND PlaylistId is null`, null, 
+    tx.executeSql(`DELETE FROM Albums WHERE master_id = ${masterId} AND playlistId is null`, null, 
 
     (txObj) => {
       return resolve()
@@ -250,9 +252,10 @@ return new Promise((resolve, reject) => {
 const queryRating = (task, albumItem) => {
  
   if(task === 'UPDATE'){
-    return `UPDATE Albums SET Rating = ${albumItem.rating} WHERE MasterId = ${albumItem.masterId}`
+    return `UPDATE Albums SET rating = ${albumItem.rating} WHERE master_id = ${albumItem.masterId}`
   }else if(task === 'INSERT'){
-    return `INSERT INTO Albums (MasterId, Album, Artist, Year, CoverArt, Genre, Rating) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replaceAll("'", "''")}', ${albumItem.rating})`
+    return `INSERT INTO Albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replace(/'/g,"''")}','${albumItem.artist.replace(/'/g,"''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replace(/'/g,"''")}', null, ${albumItem.rating})`
+    //return `INSERT INTO Albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replaceAll("'", "''")}', null, ${albumItem.rating})`
   }else{
     return null
   }
@@ -261,10 +264,26 @@ const queryRating = (task, albumItem) => {
 const queryPlaylist = (task, albumItem) => {
 
   if(task === 'UPDATE'){
-    return `UPDATE Albums SET PlaylistId = ${albumItem.playlistId} WHERE MasterId = ${albumItem.masterId}`
+    return `UPDATE Albums SET playlistId = ${albumItem.playlistId} WHERE master_id = ${albumItem.masterId}`
   }else if(task === 'INSERT'){
-    return `INSERT INTO Albums (MasterId, Album, Artist, Year, CoverArt, Genre, PlaylistId) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replaceAll("'", "''")}', ${albumItem.playlistId})`
+    return `INSERT INTO albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replace(/'/g,"''")}','${albumItem.artist.replace(/'/g,"''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replace(/'/g,"''")}', ${albumItem.playlistId}, null)`
+    //return `INSERT INTO albums (master_id, title, artist, year, cover_image, genre, playlistId, rating) VALUES (${albumItem.masterId}, '${albumItem.album.replaceAll("'", "''")}','${albumItem.artist.replaceAll("'", "''")}', ${albumItem.year}, '${albumItem.coverArt}', '${albumItem.genre.replaceAll("'", "''")}', ${albumItem.playlistId}, null)`
   }else{
     return null
   }
+}
+
+export const getRatingsList = (setList) => {
+
+  var ratingsArray = []
+
+  for(let i = 0; i<= 5; i+=0.5){
+    ratingsArray.push({
+      "ID" : i.toString(),
+      "Name" : `${i.toString()} Star${i !== 1 ? 's' : ''}`
+    })
+  }
+
+  return setList(ratingsArray)
+  
 }

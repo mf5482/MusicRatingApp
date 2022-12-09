@@ -6,6 +6,7 @@ export default TrackListingScreen = ({navigation, route}) => {
 
     const isInitialMount = useRef(true);
 
+    const [organized, setOrganized] = useState(false)
     const [type, setType] = useState(null)
     const [organizedListing, setOrganizedListing] = useState([{'title' : '', 'data' : []}])
 
@@ -16,7 +17,6 @@ export default TrackListingScreen = ({navigation, route}) => {
         if(route.params.trackListing[0]['type_'] === 'heading'){
             setHasHeadings(true)
         }
-        console.log(hasHeadings, 'p')
         if(route.params.trackListing[0].position.includes('-') || (route.params.trackListing[1] != undefined && route.params.trackListing[1].position.includes('-'))){
             setType('Double')
         }else if(/[a-zA-Z]/.test(route.params.trackListing[0].position) ||(route.params.trackListing[1] != undefined && /[a-zA-Z]/.test(route.params.trackListing[1].position))){
@@ -28,21 +28,9 @@ export default TrackListingScreen = ({navigation, route}) => {
         
     }, [])
 
-    const getNumber = (position) => {
-        console.log("Rats" ,position)
-            if(type === 'Album'){
-                return parseInt(position.substring(position.search(/\d/), position.length))
-                
-            }else if(type === 'Double'){
-                return parseInt(position.substring(position.indexOf('-') + 1, position.length))
-            }
-            
-        return parseInt(position)
 
-    }
 
     useEffect(()=>{
-        console.log(type)
 
         if (isInitialMount.current) {
             isInitialMount.current = false;
@@ -71,15 +59,12 @@ export default TrackListingScreen = ({navigation, route}) => {
                 if(!(song['position'].includes('Video'))){
                     //Headings + Created Side Names
                     if((song['type_'] === 'heading')){
-                            console.log('Here', song['title']) 
                             if(current['data'].length > 0){
-                                console.log('Push',current['title'])
                                 newTrackListing.push(current)
                                 current = {}
                                 current['data'] = []
                             }
 
-                            console.log('B-', song['title'],song['type_'])
                             current['title'] = song['title']
 
                             trackNumber = 0
@@ -87,33 +72,30 @@ export default TrackListingScreen = ({navigation, route}) => {
                             
                             
                         }else{
-                            console.log('D-', song['title'],song['type_'])
-                            current['data'].push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
+                            current['data'].push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration'], 'position' : song['position']})
                         }
                     } 
                 })
     
                 if(current["data"].length > 0){
-                    console.log('Push')
                     newTrackListing.push(current)
                 }
 
-                console.log(newTrackListing)
     
             setOrganizedListing(newTrackListing)
+            setOrganized(true)
+
         }else{
             route.params.trackListing.forEach((song, index) =>{
                 if(!(song['position'].includes('Video'))){
                      
                     if((type === 'Album' || type === 'Double') && ((song['type_'] != 'index' && current['title'] !== `${d} ${song['position'].charAt(0)}`) || (song['type_'] === 'index' && song['sub_tracks'] != undefined && current['title'] !== `${d} ${song['sub_tracks'][0]['position'].charAt(0)}`))){
                             if(current['data'].length > 0){
-                                console.log('Push',current['title'])
                                 newTrackListing.push(current)
                                 current = {}
                                 current['data'] = []
                             }
                            
-                            console.log('C-', song['title'],song['type_'])
                             current['title'] = `${d} ${song['position'].charAt(0)}`
                             
                             trackNumber = 0
@@ -121,147 +103,66 @@ export default TrackListingScreen = ({navigation, route}) => {
                         }
     
                         if((type === 'Album' || type === 'Double')){
-                            console.log('G-', song['title'],song['type_'])
-                            current['data'].push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
+                            current['data'].push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration'], 'position' : song['position']})
                         }else{
-                            console.log('H-', song['title'],song['type_'])
-                            newTrackListing.push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
+                            newTrackListing.push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration'], 'position' : song['position']})
                         }
     
                     }
                 })
 
                 if(current["data"].length > 0){
-                    console.log('Push')
                     newTrackListing.push(current)
                 }
+
     
-            setOrganizedListing(newTrackListing)
+                setOrganizedListing(newTrackListing)
+
+                setOrganized(true)
             }
-         
-        /*route.params.trackListing.forEach((song, index) =>{
-            if(!(song['position'].includes('Video'))){
-                //Headings + Created Side Names
-                if((song['type_'] === 'heading') || (current['title'] === undefined && (type === 'Album' || type === 'Double') && route.params.trackListing[index+1] != undefined && getNumber(route.params.trackListing[index+1]['position']) === 1)){
-
-                        console.log('Here', song['title']) 
-                        if(current['data'].length > 0){
-                            console.log('Push',current['title'])
-                            console.log(current['data'])
-                            newTrackListing.push(current)
-                            current = {}
-                            current['data'] = []
-                        }
-                        if(song['type_'] === 'heading'){
-                            console.log('B-', song['title'],song['type_'])
-                            current['title'] = song['title']
-                        }else{
-                            console.log('C-', song['title'],song['type_'])
-                            current['title'] = `${d} ${song['position'].charAt(0)}`
-                        }
-                        trackNumber = 0
-                    }
-
-                    if(song['type_'] != 'heading' && head === true){
-                        console.log('D-', song['title'],song['type_'])
-                        current['data'].push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
-                    }else if(head === false){
-                        console.log('E-', song['title'],song['type_'])
-                        newTrackListing.push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
-                    }
-
-                }
-                
-            })
-
-            if(current["data"].length > 0){
-                console.log('Push')
-                newTrackListing.push(current)
-            }
-
-        setOrganizedListing(newTrackListing)
-         } */
 
         
 }}, [type])
     
-
-    /*
-    var head = false
-
-            route.params.trackListing.forEach((song, index) =>{
-                if(!(song['position'].includes('Video'))){
-                    //Headings + Created Side Names
-                    if((song['type_'] === 'heading') || (head === false && (type === 'Album' || type === 'Double') && getNumber(route.params.trackListing[index]['position']) === 1)){
-                            head = true    
-                            if(current['data'].length > 0){
-                                newTrackListing.push(current)
-                                current = {}
-                                current['data'] = []
-                            }
-                            if(song['type_'] === 'heading'){
-                                console.log('B-', song['title'],song['type_'])
-                                current['title'] = song['title']
-                            }else{
-                                console.log('C-', song['title'],song['type_'])
-                                current['title'] = `${d} ${song['position'].charAt(0)}`
-                            }
-                            trackNumber = 0
-                        }
-
-                        if(song['type_'] != 'heading' && head === true){
-                            console.log('D-', song['title'],song['type_'])
-                            current['data'].push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
-                        }else if(head === false){
-                            console.log('E-', song['title'],song['type_'])
-                            newTrackListing.push({'number': ++trackNumber, 'title':song['title'], 'duration': song['duration']})
-                        }
-
-                    }
-                    
-                })
-
-                if(current != {}){
-                    newTrackListing.push(current)
-                }
-
-                console.log(newTrackListing)
-    */
 
 
     
 
 
     const TrackList = (props) => {
-        if(hasHeadings || (type === 'Album' || type === 'Double')){
-            return(
-                <SectionList  bounces={true} style={{"height":'50%'}} sections = {organizedListing}
-                keyExtractor = {(item, index) => index}
-                renderItem = {(item) => trackItem(item.item)}
-                renderSectionHeader={(item) => sectionHeader(item.section)}
-                />
-            )
-        }else{
-            return(
-                <FlatList bounces={true} style={{"height":'50%'}} data={organizedListing}
-                keyExtractor = {(item, index) => index}
-                renderItem = {(item) => trackItem(item.item)}
-                />
-            )
-        }
+
+            if(hasHeadings || (type === 'Album' || type === 'Double')){
+                return(
+                    <SectionList initialNumToRender={15}  bounces={true} style={{height:"50%"}} sections = {organizedListing}
+                    keyExtractor = {(item) => {
+                        return item.position}
+                    }
+                    renderItem = {(item) => trackItem(item.item)}
+                    renderSectionHeader={(item) => sectionHeader(item.section)}
+                    />
+                )
+            }else{
+                return(
+                    <FlatList initialNumToRender={15} bounces={true} style={{height:"50%"}} data={organizedListing}
+                    keyExtractor = {(item) => {return item.position}}
+                    renderItem = {(item) => trackItem(item.item)}
+                    />
+                )
+            }
+        
     }
 
     const trackItem = (item) => {
         return(
-            <TouchableOpacity style={{'flexDirection' : 'row','borderWidth' : 2, width: '100%', height: 60, 'justifyContent' : 'center', 'backgroundColor' : 'black'}}>
-                    <View style={{'width' : '7%', alignItems: 'center', justifyContent : 'center'}}>
-                        <Text style={{fontWeight: 'bold', color: 'white'}}>{item.number}</Text>
+            <TouchableOpacity style={{flexDirection : "row",borderWidth : 2, width: "100%", height: 60, justifyContent : "center", backgroundColor : "black"}}>
+                    <View style={{width : "7%", alignItems: "center", justifyContent : "center"}}>
+                        <Text style={{fontWeight: "bold", color: "white"}}>{item.number}</Text>
                     </View>
-                    <View style={{'width' : '78%',  justifyContent : 'center'}}>
-                        <Text numberOfLines={3} style={{fontSize: 15, color: 'white'}}>{item.title}</Text>
+                    <View style={{width : "78%",  justifyContent : "center"}}>
+                        <Text numberOfLines={3} style={{fontSize: 15, color: "white"}}>{item.title}</Text>
                     </View>
-                    <View style={{'width' : '15%', alignItems : 'center', justifyContent : 'center'}}>
-                        <Text style={{color: 'white'}}>{item.duration}</Text>
+                    <View style={{width : "15%", alignItems : "center", justifyContent : "center"}}>
+                        <Text style={{color: "white"}}>{item.duration}</Text>
                     </View>
            </TouchableOpacity>
         )
@@ -269,17 +170,33 @@ export default TrackListingScreen = ({navigation, route}) => {
 
     const sectionHeader = (item) =>{
         return(
-            <View style = {{height : 30, 'justifyContent' : 'center', backgroundColor:'gray'}}>
-                <Text style= {{fontWeight: 'bold', fontSize : 22, color: 'white'}}>{item.title}</Text>
+            <View style = {{height : 30, justifyContent : "center", backgroundColor:"gray"}}>
+                <Text style= {{fontWeight: "bold", fontSize : 22, color: "white"}}>{item.title}</Text>
             </View>
         )    }
     
 
     return(
         <View>
-            <View style={{backgroundColor : 'black', "justifyContent":"center","height":"100%"}}>
-                <TrackList/>
+            <View style={{backgroundColor : "black", justifyContent:"center",height:"100%"}}>
+                {organized ? <TrackList/> : <View></View>}
             </View>
         </View>
     )
 }
+
+/*
+                    <SectionList initialNumToRender={15}  bounces={true} style={{height:"50%"}} sections = {organizedListing}
+                    <FlatList initialNumToRender={15} bounces={true} style={{height:"50%"}} data={organizedListing}
+            <TouchableOpacity style={{flexDirection : "row",borderWidth : 2, width: "100%", height: 60, justifyContent : "center", backgroundColor : "black"}}>
+                    <View style={{width : "7%", alignItems: "center", justifyContent : "center"}}>
+                        <Text style={{fontWeight: "bold", color: "white"}}>{item.number}</Text>
+                    <View style={{width : "78%",  justifyContent : "center"}}>
+                        <Text numberOfLines={3} style={{fontSize: 15, color: "white"}}>{item.title}</Text>
+                    <View style={{width : "15%", alignItems : "center", justifyContent : "center"}}>
+                        <Text style={{color: "white"}}>{item.duration}</Text>
+            <View style = {{height : 30, justifyContent : "center", backgroundColor:"gray"}}>
+                <Text style= {{fontWeight: "bold", fontSize : 22, color: "white"}}>{item.title}</Text>
+            <View style={{backgroundColor : "black", justifyContent:"center",height:"100%"}}>
+
+*/

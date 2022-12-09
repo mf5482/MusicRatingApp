@@ -38,3 +38,10 @@ export default removeButton = (props) => {
         </TouchableOpacity>
     )
 }
+
+//        <TouchableOpacity style={{alignItems:'center'}} onPress={showConfirmBox}>
+//ButtonPlacement
+//            <View style={PlaylistListStyle.removeButton}>
+//ButtonStyle
+//<Text style={{color:'white', 'textAlign' : 'center', width:'100%', fontSize:16}}>Remove</Text>
+//ButtonText

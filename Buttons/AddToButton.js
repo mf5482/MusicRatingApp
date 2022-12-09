@@ -17,3 +17,8 @@ export default overlayMenu = ((props) => {
         </TouchableOpacity>
     );
 })
+
+//                <Modal  animationType="fade" transparent={true} visible={menuVisible} onRequestClose={() => {setMenuVisible(!menuVisible)}} style={{"justifyContent":"center"}}>
+//ModalPlacement
+//            <Text style={{color:'white', 'textAlign' : 'center'}}>{props.text}</Text>
+//ButtonText

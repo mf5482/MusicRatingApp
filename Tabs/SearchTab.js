@@ -16,7 +16,6 @@ import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview
 const Stack = createNativeStackNavigator();
 var run = 0
 var hit = 0
-var e = 0
 
 
 const DefaultSearchScreen = ({navigation}) => {
@@ -76,16 +75,16 @@ const DefaultSearchScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.searchBox}>
-                <TextInput style={[styles.searchBar, isLoading ? {'width':'90%'} : '']}
+                <TextInput style={[styles.searchBar, isLoading ? {width:"90%"} : ""]}
                     onChangeText = {(text) =>{
                         onChangeText(text)
                     }} 
-                    clearButtonMode={'while-editing'}
+                    clearButtonMode={"while-editing"}
                     placeholder = {"Search Albums"}
                     value = {text}
                 />
                 {isLoading && <TouchableOpacity style = {styles.clearIcon}>
-                    <ActivityIndicator color ={'#ffffff'}/>
+                    <ActivityIndicator color ={"#ffffff"}/>
 </TouchableOpacity>}
                 
             </View>
@@ -103,11 +102,11 @@ const SearchTab = () => {
     return(
         <Stack.Navigator screenOptions={() => ({
             headerStyle : {
-              backgroundColor : 'black'
+              backgroundColor : "black"
             },
-            headerTintColor : 'white',
+            headerTintColor : "white",
             headerTitleStyle : {
-              fontWeight : 'bold'
+              fontWeight : "bold"
             }           
   
         })}>
@@ -121,3 +120,20 @@ const SearchTab = () => {
 }
 
 export default SearchTab
+
+/*
+ <View style={styles.container}>
+            <View style={styles.searchBox}>
+                <TextInput style={[styles.searchBar, isLoading ? {width:"90%"} : ""]}
+                                {isLoading && <TouchableOpacity style = {styles.clearIcon}>
+                                            <View style ={styles.resultsList}>
+
+        <Stack.Navigator screenOptions={() => ({
+            headerStyle : {
+              backgroundColor : "black"
+            },
+            headerTintColor : "white",
+            headerTitleStyle : {
+              fontWeight : "bold"
+            }   
+*/

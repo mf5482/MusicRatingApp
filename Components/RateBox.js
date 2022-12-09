@@ -3,23 +3,23 @@ import React, { useState,useEffect } from "react";
 import {View, Modal,Button,TouchableOpacity,Text,FlatList} from 'react-native'
 
 import StarRating from 'react-native-star-rating';
-import {Slider} from '@miblanchard/react-native-slider';
+//import { Slider } from "@rneui/themed";
+import Slider from '@react-native-community/slider';
 
 import { saveAlbumRating, removeAlbumRating } from "../SQLite/sql.js";
 
 export default RateBox = (props) => {
-    console.log(props.albumItem['masterId'])
 
     const [rating, setCurrentRating] =  useState(props.albumItem['rating'])
 
     useEffect (() => {
-        if(rating === null){
+        if(rating === null || rating === undefined){
             setCurrentRating(2.5)
         }
     }, [rating])
 
     const onSlideChange = (r) => {
-        setCurrentRating(r[0])
+        setCurrentRating(r)
     }
 
     const saveRating = async () => {
@@ -51,32 +51,6 @@ export default RateBox = (props) => {
         props.close()
     }
 
-   /* useEffect(async ()=> {
-        var r
-
-
-        if(props.albumItem['playlistId'] === null && props.albumItem['rating'] === null){
-            try{
-
-                props.albumItem['rating'] = rating
-
-                r = await saveAlbumRating('INSERT', props.albumItem)
-
-                if(r.toString().includes("UNIQUE constraint failed")){
-                    await saveAlbumRating('UPDATE', props.albumItem)
-                }
-
-            }catch(err){
-                console.log(err)
-            }
-        }else{
-
-            props.albumItem['rating'] = rating
-            await saveAlbumRating('UPDATE', props.albumItem)
-        }
-
-    
-    }, [rating]) */
 
     const removeRating = async () => 
     { 
@@ -87,41 +61,41 @@ export default RateBox = (props) => {
     }
 
     return(
-        <View style = {{'width' : '100%','height' : '100%', 'justifyContent' : 'center', 'alignItems' : 'center'}}>
-        <View style = {{'backgroundColor' : 'black', width:300, 'height' : 175}}>
-            <View style={{'width':'100%', 'height' : 50, 'paddingTop' : '3%'}}>
-                <Text numberOfLines={1} style={{color:"white", textAlign:'center', fontSize : 20, fontWeight : 'bold'}}>{props.albumItem['album']}</Text>
-                <Text numberOfLines={1} style={{color:"white", textAlign:'center', fontSize : 14}}>{props.albumItem['artist']}</Text>
+        <View style = {{width : "100%",height : "100%", justifyContent : "center", alignItems : "center"}}>
+        <View style = {{backgroundColor : "black", width:300, height : 175}}>
+            <View style={{width:"100%", height : 50, paddingTop : "3%"}}>
+                <Text numberOfLines={1} style={{color:"white", textAlign:"center", fontSize : 20, fontWeight : "bold"}}>{props.albumItem["album"]}</Text>
+                <Text numberOfLines={1} style={{color:"white", textAlign:"center", fontSize : 14}}>{props.albumItem["artist"]}</Text>
             </View>
-            <View style={{'height' : '30%', 'width':'100%', 'justifyContent':'center', 'alignItems':'center'}}>
-                <View style={{'width' : '70%'}}>
-                    <View style={{'position':'absolute', 'width' : '100%', 'justifyContent':'center'}}>
+            <View style={{height : 52, width:"100%", justifyContent:"center", alignItems:"center"}}>
+                <View style={{width : 220, alignItems:"center"}}>
+                    <View style={{position:"absolute", width : "100%", justifyContent:"center"}}>
                         <StarRating rating={rating} halfStarEnabled={true}  disabled={true} fullStarColor="yellow"></StarRating>
                     </View>
-                    <View style={{opacity: 0, position:'relative'}}>
-                        <Slider value={rating} minimumValue={0} maximumValue={5} step={0.5} onValueChange={onSlideChange} trackStyle="blue"/>
+                    <View style={{opacity: 0, position:"relative", marginLeft:0}}>
+                        <Slider style={{"width":260}} thumbStyle={{width:10, height:15}} value={rating} tapToSeek={true} minimumValue={0} maximumValue={5} step={0.5} onValueChange={onSlideChange} trackStyle="blue"/>
                     </View>
                 </View>
             </View>
-            <View style={{'flexDirection' : 'row', 'justifyContent' : 'center', 'height' : 75, 'width' : '100%'}}>
-                <View style={[{justifyContent : 'center', 'alignItems' : 'center' }, props.albumItem['rating'] == null ? {"width":'50%'} : {"width":'30%'}]}>
-                    <TouchableOpacity onPress={props.close} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : 50, 'backgroundColor' : 'red' }}>
+            <View style={{flexDirection : "row", justifyContent : "center", height : 75, width : "100%"}}>
+                <View style={[{justifyContent : "center", alignItems : "center" }, props.albumItem['rating'] == null ? {width:"50%"} : {width:"30%"}]}>
+                    <TouchableOpacity onPress={props.close} style={{ borderRadius: 5, width : "80%", alignItems :"center", justifyContent : "center", height : 50, backgroundColor : "red" }}>
                         <View>
                             <Text style={{color:"white"}}>Cancel</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 {props.albumItem['rating'] != null ? 
-                   <View style={[{justifyContent : 'center', 'alignItems' : 'center' }, props.albumItem['rating'] == null ? {"width":'50%'} : {"width":'30%'}]}>
-                   <TouchableOpacity onPress={removeRating} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : 50, 'backgroundColor' : 'green' }}>
+                   <View style={[{justifyContent : "center", alignItems : "center" }, props.albumItem['rating'] == null ? {width:"50%"} : {width:"30%"}]}>
+                   <TouchableOpacity onPress={removeRating} style={{ borderRadius: 5, width : "80%", alignItems :"center", justifyContent : "center", height : 50, backgroundColor : "green" }}>
                        <View>                     
                            <Text style={{color:"white"}}>Remove</Text>
                        </View>
                    </TouchableOpacity>
                </View>
                 : null}
-                <View style={[{justifyContent : 'center', 'alignItems' : 'center' }, props.albumItem['rating'] == null ? {"width":'50%'} : {"width":'30%'}]}>
-                    <TouchableOpacity onPress={saveRating} style={{ borderRadius: 5, 'width' : '80%', 'alignItems' :'center', 'justifyContent' : 'center', 'height' : 50, 'backgroundColor' : 'blue' }}>
+                <View style={[{justifyContent : "center", alignItems : "center" }, props.albumItem['rating'] == null ? {width:"50%"} : {width:"30%"}]}>
+                    <TouchableOpacity onPress={saveRating} style={{ borderRadius: 5, width : "80%", alignItems :"center", justifyContent : "center", height : 50, backgroundColor : "blue" }}>
                         <View>                     
                             <Text style={{color:"white"}}>Rate</Text>
                         </View>
@@ -132,3 +106,26 @@ export default RateBox = (props) => {
         </View>
     );
 }
+
+/*
+        <View style = {{width : "100%",height : "100%", justifyContent : "center", alignItems : "center"}}>
+        <View style = {{backgroundColor : "black", width:300, height : 175}}>
+<View style={{width:"100%", height : 50, paddingTop : "3%"}}>
+                <Text numberOfLines={1} style={{color:"white", textAlign:"center", fontSize : 20, fontWeight : "bold"}}>{props.albumItem["album"]}</Text>
+                <Text numberOfLines={1} style={{color:"white", textAlign:"center", fontSize : 14}}>{props.albumItem["artist"]}</Text>
+<View style={{height : 52, width:"100%", justifyContent:"center", alignItems:"center"}}>
+                <View style={{width : 220, alignItems:"center"}}>
+                    <View style={{position:"absolute", width : "100%", justifyContent:"center"}}>
+                    <View style={{opacity: 0, position:"relative", marginLeft:0}}>
+                        <Slider style={{"width":260}} thumbStyle={{width:10, height:15}} value={rating} tapToSeek={true} minimumValue={0} maximumValue={5} step={0.5} onValueChange={onSlideChange} trackStyle="blue"/>
+                       <View style={{flexDirection : "row", justifyContent : "center", height : 75, width : "100%"}}>
+                <View style={[{justifyContent : "center", alignItems : "center" }, props.albumItem['rating'] == null ? {width:"50%"} : {width:"30%"}]}>
+                    <TouchableOpacity onPress={props.close} style={{ borderRadius: 5, width : "80%", alignItems :"center", justifyContent : "center", height : 50, backgroundColor : "red" }}>
+                                      <Text style={{color:"white"}}>Cancel</Text>
+              <View style={[{justifyContent : "center", alignItems : "center" }, props.albumItem['rating'] == null ? {width:"50%"} : {width:"30%"}]}>
+                   <TouchableOpacity onPress={removeRating} style={{ borderRadius: 5, width : "80%", alignItems :"center", justifyContent : "center", height : 50, backgroundColor : "green" }}>                     
+                           <Text style={{color:"white"}}>Remove</Text>
+                           <View style={[{justifyContent : "center", alignItems : "center" }, props.albumItem['rating'] == null ? {width:"50%"} : {width:"30%"}]}>
+                    <TouchableOpacity onPress={saveRating} style={{ borderRadius: 5, width : "80%", alignItems :"center", justifyContent : "center", height : 50, backgroundColor : "blue" }}>
+                            <Text style={{color:"white"}}>Rate</Text>
+                */

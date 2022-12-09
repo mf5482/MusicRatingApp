@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import { View, Text, Dimensions, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
+import { AlbumListItem } from "./AlbumListItem.js";
+import NoResultsList from "./NoResultsList.js";
 
 
 /***
@@ -29,10 +31,22 @@ const RecycleTestComponent = (props) => {
     const rowRenderer = (type, item) => {
     //You can return any view here, CellContainer has no special significance
 
-    const title = item.title.substring(item.title.indexOf(" - ") + 3, item.title.length)
-    const artist = item.title.substring(0, item.title.indexOf(" - "))
+    title = item.title.substring(item.title.indexOf(" - ") + 3, item.title.length)
+    artist = item.title.substring(0, item.title.indexOf(" - "))
+
+    const album = {
+        "title" : title,
+        "artist" : artist,
+        "cover_image" : item.cover_image,
+        "master_id" : item.master_id
+    }
+
 
     return(
+        <AlbumListItem album={album} onPress={props.onPress}/>
+    )
+
+    /*return(
     <TouchableOpacity style = {styles.albumItem} onPress = {() => {props.onPress(item.master_id)}}>
             <View style = {{height:"50%", width:"35%", "alignItems" : "center"}}>
                 <Image style={{aspectRatio: 1/1, height:'165%'}} source={item.cover_image != '' ? {uri:item.cover_image} : require('../assets/blankCD.jpeg')} />
@@ -42,15 +56,7 @@ const RecycleTestComponent = (props) => {
                 <Text numberOfLines={2} style={{color: 'gray'}}>{artist}</Text>
             </View>
     </TouchableOpacity>
-   );
-    }
-
-    const NoResultsScreen = () => {
-        return (
-            <View style ={{'height': '100%', 'justifyContent' : 'center', 'alignItems':'center'}}>
-                <Text style={{"paddingBottom" : '10%', "color" : 'white'}}>No Results Returned</Text>
-            </View>
-        )
+   ); */
     }
 
     const listView = useRef()
@@ -73,38 +79,13 @@ const RecycleTestComponent = (props) => {
     <View style={{flex:1}}>
         {props.dp["_data"].length > 0 ? 
      <RecyclerListView ref={listView} layoutProvider={_layoutProvider.current} dataProvider={props.dp} rowRenderer={rowRenderer} />
-    :<NoResultsScreen />}
+    :<NoResultsList />}
      </View>
     )
     
 }
 
-
-
 export default RecycleTestComponent
 
-const styles = {
-    container: {
-        justifyContent: "space-around",
-        alignItems: "center",
-        flex: 1,
-        backgroundColor: "#00a1f1"
-    },
-    containerGridLeft: {
-        justifyContent: "space-around",
-        alignItems: "center",
-        flex: 1,
-        backgroundColor: "#ffbb00"
-    },
-    containerGridRight: {
-        justifyContent: "space-around",
-        alignItems: "center",
-        flex: 1,
-        backgroundColor: "#7cbb00"
-    },
-    albumItem:{
-       "display" : "flex",
-       height : 90,
-       "flexDirection" : 'row',
-       }
-};
+/*    <View style={{flex:1}}>
+*/

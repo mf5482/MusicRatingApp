@@ -11,20 +11,26 @@
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.1.0",
+    "@react-native-community/slider": "4.1.12",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native-stack": "^6.6.2",
+    "@rneui/base": "^4.0.0-rc.6",
+    "@rneui/themed": "^4.0.0-rc.6",
     "axios": "^0.26.1",
-    "dotenv": "^16.0.2",
     "expo": "~44.0.0",
     "expo-file-system": "~13.1.4",
     "expo-sqlite": "~10.1.0",
     "expo-status-bar": "~1.2.0",
+    "metro-react-native-babel-preset": "^0.72.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-dotenv": "^3.3.1",
+    "react-native-section-alphabet-list": "^2.1.0",
     "react-native-star-rating": "^1.1.0",
     "react-native-web": "0.17.1",
-    "recyclerlistview": "^4.1.1"
+    "recyclerlistview": "^4.1.1",
+    "StatusBar": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
