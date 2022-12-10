@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {FlatList, View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native'
+import React from 'react'
+import {FlatList, View, Image, Text, TouchableOpacity} from 'react-native'
 import styles from '../Styles/HorizontalAlbumList.style.js'
 
 
@@ -7,7 +7,6 @@ export default HorizontalAlbumList = (props) => {
 
 
     const showAlbum = (item) => {
-        //<Image style={{aspectRatio: 1/1, height:'70%'}} source={item.item.CoverArt != '' ? {uri:item.item.CoverArt} : require('../assets/blankCD.jpeg')} />
 
         return(<TouchableOpacity style={styles.albumContainer} onPress = {() => {props.onPress(item.master_id)}}>
                

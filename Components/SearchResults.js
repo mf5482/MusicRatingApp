@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
-import { View, Text, Dimensions, TouchableOpacity, Image, ActivityIndicator, StyleSheet } from "react-native";
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
+import React, { useRef, useEffect, useState } from "react";
+import { View, Dimensions } from "react-native";
+import { RecyclerListView, LayoutProvider } from "recyclerlistview";
 import { AlbumListItem } from "./AlbumListItem.js";
 import NoResultsList from "./NoResultsList.js";
 import styles from "../Styles/SearchTab.style.js"
@@ -11,7 +11,6 @@ import styles from "../Styles/SearchTab.style.js"
  */
 const RecycleTestComponent = (props) => {
     const isInitialMount = useRef(true);
-    const [isEmpty, setIsEmpty] = useState(true)
     const [pastLength, setPastLength] = useState(0)
 
     let { width } = Dimensions.get("window");

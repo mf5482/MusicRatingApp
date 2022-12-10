@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react'
-import {View, Text, StyleSheet, ScrollView, RefreshControl, Button, Pressable, TouchableHighlight, SafeAreaView} from 'react-native'
+import {View, Text, ScrollView, RefreshControl, TouchableHighlight, SafeAreaView} from 'react-native'
 import HorizontalAlbumList from '../Components/HorizontalAlbumList.js'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AlbumInfoScreen from '../Screens/AlbumInfoScreen.js'
@@ -51,7 +51,6 @@ const DefaultHomePage = ({navigation}) =>{
     const onRefresh = useCallback(() => {
         setRefreshing(true);
 
-        console.log('refresh')
         setTimeout(async () => {
 
             await Promise.all([getAlbums(setUpNext, 1, undefined, true, null),

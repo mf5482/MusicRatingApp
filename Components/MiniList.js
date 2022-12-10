@@ -1,10 +1,6 @@
-import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView, StyleSheet} from 'react-native'
-import { getPlaylists, addToPlaylist } from "../SQLite/sql.js";
+import React from "react";
+import {View,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView} from 'react-native'
 import styles from '../Styles/MiniList.style.js'
-
-
-import Ionicon from 'react-native-vector-icons/Ionicons';
 
 export default MiniList = ((props) => {
 

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import {View,TouchableOpacity,Text,SectionList, FlatList,StyleSheet} from 'react-native'
+import {View,TouchableOpacity,Text,SectionList, FlatList} from 'react-native'
 import styles from '../Styles/TrackListingScreen.style.js'
 
 export default TrackListingScreen = ({navigation, route}) => {

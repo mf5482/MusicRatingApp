@@ -1,11 +1,8 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar } from 'react-native';
+import { View, SafeAreaView, StatusBar } from 'react-native';
 import React from 'react';
 import HomeTab from './Tabs/HomeTab.js'
-import SettingsTab from './Tabs/SettingsTab.js';
-import DiscoverTab from './Tabs/DiscoverTab.js'
 import SearchTab from './Tabs/SearchTab.js'
 import styles from "./Styles/App.style.js"
-//import styles from './Styles/Homescreen.style'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';

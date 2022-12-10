@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import {View, Text, TouchableOpacity, Modal, StyleSheet} from 'react-native'
+import {View, Text, TouchableOpacity, Modal} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MiniList from './MiniList.js'
 import styles from '../Styles/ListBar.style.js'

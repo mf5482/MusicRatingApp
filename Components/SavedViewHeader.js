@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Modal, TouchableWithoutFeedback, StyleSheet} from 'react-native'
+import {View, Text, TouchableOpacity, Modal} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react'
 import {SortList} from './MiniList.js'

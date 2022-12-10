@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text} from 'react-native'
+import React, { useState} from "react";
+import {Modal,TouchableOpacity,Text} from 'react-native'
 import AddToScreen from '../Components/AddToScreen.js'
-import { removeAlbum } from '../SQLite/sql.js'
 
 
 

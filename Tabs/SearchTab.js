@@ -1,15 +1,14 @@
 import React, {useState, useEffect, useRef} from 'react'
-import {View, Text, TextInput, Switch, TouchableOpacity, ActivityIndicator} from 'react-native'
+import {View, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native'
 import { searchDiscogs } from '../MusicDatabase/discogs.js'
 import styles from '../Styles/SearchTab.style.js'
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AlbumInfoScreen from '../Screens/AlbumInfoScreen.js'
 import SearchResults from '../Components/SearchResults.js'
 import TrackListingScreen from '../Components/TrackListingScreen.js'
 import AddToScreen from '../Components/AddToScreen.js'
 
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
+import {DataProvider} from "recyclerlistview";
 
 
 const Stack = createNativeStackNavigator();

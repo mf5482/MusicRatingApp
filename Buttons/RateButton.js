@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text,FlatList, StyleSheet} from 'react-native'
+import React, { useState } from "react";
+import {View, Modal,TouchableOpacity,Text} from 'react-native'
 import RateBox from "../Components/RateBox.js";
 import styles from '../Styles/RateButton.style.js'
 

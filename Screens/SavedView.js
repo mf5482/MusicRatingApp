@@ -1,9 +1,9 @@
 import {useState, useEffect, useCallback} from 'react'
-import {View, Text, Button, Modal, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native'
+import {SafeAreaView} from 'react-native'
 import {ListBar} from '../Components/ListBar.js'
 import {SavedList} from '../Components/SavedList'
 import { getPlaylists, getAlbums, getRatingsList } from '../SQLite/sql.js'
-import SavedViewHeader, {savedViewHeader} from '../Components/SavedViewHeader.js'
+import SavedViewHeader from '../Components/SavedViewHeader.js'
 import { SavedViewStyle } from '../Styles/MiscScreenStyles.style.js'
 
 

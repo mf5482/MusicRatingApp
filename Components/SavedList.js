@@ -1,8 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { AlbumListItem } from "./AlbumListItem.js";
-import { SectionList, View, Text, RefreshControl, StyleSheet} from "react-native";
+import { View, Text, RefreshControl} from "react-native";
 import NoResultsList from "./NoResultsList.js";
-import { AlphabetSlider } from "../Old/AlphabetSlider.js";
 import { LoadingScreen } from "../Screens/LoadingScreen.js";
 import AlphabetSectionList from "react-native-alphabet-sectionlist/src/AlphabetSectionList.js";
 import styles from '../Styles/SavedList.style.js'
@@ -11,8 +10,7 @@ const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P
 
 
 export const SavedList = (props) => {
-//   <Text>{props.id}</Text>
-
+  
   const [list, setList] = useState([])
 
 

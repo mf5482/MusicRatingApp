@@ -1,9 +1,8 @@
 
 import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity, TouchableWithoutFeedback, Text,FlatList, StyleSheet} from 'react-native'
+import {View,TouchableOpacity, TouchableWithoutFeedback, Text,} from 'react-native'
 
 import StarRating from 'react-native-star-rating';
-//import { Slider } from "@rneui/themed";
 import Slider from '@react-native-community/slider';
 
 import { saveAlbumRating, removeAlbumRating } from "../SQLite/sql.js";

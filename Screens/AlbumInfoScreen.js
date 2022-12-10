@@ -1,20 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react'
-import {View, Text, Image, TouchableOpacity, ScrollView, StyleSheet} from 'react-native'
+import {View, Text, Image, ScrollView} from 'react-native'
 import styles from '../Styles/AlbumInfoScreen.style.js'
 
-import { getAlbumInfo_LastFM } from '../MusicDatabase/lastfm.js'
-import { searchAlbum_Discogs, getAlbum_Discogs } from '../MusicDatabase/discogs.js'
-import { executeSQL, addAlbum, getAlbumPlaylist, getPlaylistName, getAlbumRating } from '../SQLite/sql.js'
+import { getAlbum_Discogs } from '../MusicDatabase/discogs.js'
+import { getAlbumPlaylist, getPlaylistName, getAlbumRating } from '../SQLite/sql.js'
 import AddToButton from '../Buttons/AddToButton.js'
 import RatingButton from '../Buttons/RateButton.js'
 import TrackListingButton from '../Buttons/TrackListingButton.js'
 import { LoadingScreen } from './LoadingScreen.js'
-
-import TrackListingScreen from '../Components/TrackListingScreen.js'
-import AddToScreen from '../Components/AddToScreen.js'
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator, NativeStackView } from '@react-navigation/native-stack';
 
 
 

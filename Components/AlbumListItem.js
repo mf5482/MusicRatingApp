@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from '../Styles/AlbumListItem.style.js'
 
 export const AlbumListItem = (props) => {
