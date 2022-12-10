@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView} from 'react-native'
+import {View, Modal,Alert,Button,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView, StyleSheet} from 'react-native'
 import { getPlaylists, addToPlaylist } from "../SQLite/sql.js";
 import PlaylistListStyle from "../Styles/PlaylistList.style.js";
-import RemoveButton from "../Buttons/RemoveButton.js";
 
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
@@ -12,6 +11,29 @@ export default addToScreen = ((props) => {
     useEffect (() => {
         getPlaylists(setPlaylists)
     }, [])
+
+    const onDelete = async () =>{
+        await removeAlbum(props.albumItem['masterId'])
+        props.returnPlaylistID(null)
+        props.close()
+    }
+
+    const showDeleteConfirmBox = () => {
+        return Alert.alert(
+            "Remove Album?",
+            "Are you sure you want to remove this album?",
+            [{
+                "text" : "Cancel",
+                "style" : "cancel"
+            },
+            {
+                "text" : "Delete",
+                "onPress" : onDelete,
+                "style" : "destructive"
+
+            }]
+        )
+    }
 
     const playlistItem = ((item) => {
 
@@ -50,18 +72,36 @@ export default addToScreen = ((props) => {
     })
 
     return (
-        <SafeAreaView style={{height:"100%"}}>
+        <SafeAreaView style={styles.addToScreenContainer}>
             <TouchableWithoutFeedback  onPress={props.close}>
-                <View style={{flex:1, backgroundColor:"rgba(0,0,0,0.5)"}}></View>
+                <View style={styles.backgroundDim}></View>
             </TouchableWithoutFeedback>
-            <View style={{ backgroundColor:"black"}}>
+            <View style={styles.listColor}>
                 <FlatList data={playlists} keyExtractor={(item) => item.ID }
             renderItem={playlistItem} />
-            {props.albumItem['playlistId'] != null ? <RemoveButton masterId = {props.albumItem['masterId']} returnPlaylistID={props.returnPlaylistID} close={props.close}/> : null}           
+            {props.albumItem['playlistId'] != null ? <TouchableOpacity style={PlaylistListStyle.removeButtonContainer} onPress={showDeleteConfirmBox}>
+            <View style={PlaylistListStyle.removeButton}>
+                <Text style={PlaylistListStyle.removeButtonText}>Remove</Text>
+            </View>
+        </TouchableOpacity> : null}           
             <Button title="Close" onPress={props.close} />
             </View>
         </SafeAreaView>
     )
+})
+
+const styles = StyleSheet.create({
+    addToScreenContainer: {
+        height:"100%"
+    },
+    backgroundDim : {
+        flex: 1,
+        backgroundColor:"rgba(0,0,0,0.5)"
+    },
+    listColor : {
+        backgroundColor: "black"
+    }
+    
 })
 
 //<SafeAreaView style={{height:"100%"}}>

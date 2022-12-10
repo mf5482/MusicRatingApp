@@ -45,4 +45,14 @@ export default StyleSheet.create({
         borderStyle: "solid",
         borderWidth : 1
     },
+
+    removeButtonText:{
+        color:"white",
+        textAlign : "center",
+        width:"100%", 
+        fontSize:16
+    },
+    removeButtonContainer:{
+        alignItems:"center"
+    }
 })

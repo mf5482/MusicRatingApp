@@ -1,6 +1,5 @@
 import React from 'react'
 import {View, Text} from 'react-native'
-import SearchResultsList from '../Components/FlatList.js'
 
 class DiscoverTab extends React.Component{
     constructor(props){
@@ -10,7 +9,6 @@ class DiscoverTab extends React.Component{
         return (
             <View>
                 <Text>This is a Discover Screen</Text>
-                <SearchResultsList/>
             </View>
         )
     }

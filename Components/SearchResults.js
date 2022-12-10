@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
-import { View, Text, Dimensions, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import { View, Text, Dimensions, TouchableOpacity, Image, ActivityIndicator, StyleSheet } from "react-native";
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
 import { AlbumListItem } from "./AlbumListItem.js";
 import NoResultsList from "./NoResultsList.js";
@@ -31,8 +31,8 @@ const RecycleTestComponent = (props) => {
     const rowRenderer = (type, item) => {
     //You can return any view here, CellContainer has no special significance
 
-    title = item.title.substring(item.title.indexOf(" - ") + 3, item.title.length)
-    artist = item.title.substring(0, item.title.indexOf(" - "))
+    let title = item.title.substring(item.title.indexOf(" - ") + 3, item.title.length)
+    let artist = item.title.substring(0, item.title.indexOf(" - "))
 
     const album = {
         "title" : title,
@@ -76,7 +76,7 @@ const RecycleTestComponent = (props) => {
 
 
     return( 
-    <View style={{flex:1}}>
+    <View style={styles.flexFill}>
         {props.dp["_data"].length > 0 ? 
      <RecyclerListView ref={listView} layoutProvider={_layoutProvider.current} dataProvider={props.dp} rowRenderer={rowRenderer} />
     :<NoResultsList />}
@@ -86,6 +86,12 @@ const RecycleTestComponent = (props) => {
 }
 
 export default RecycleTestComponent
+
+const styles = StyleSheet.create({
+    flexFill:{
+        flex:1
+    }
+})
 
 /*    <View style={{flex:1}}>
 */

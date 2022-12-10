@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import {View,TouchableOpacity,Text,SectionList, FlatList} from 'react-native'
-import styles from '../Styles/trackListing.style.js'
+import {View,TouchableOpacity,Text,SectionList, FlatList,StyleSheet} from 'react-native'
 
 export default TrackListingScreen = ({navigation, route}) => {
 
@@ -133,7 +132,7 @@ export default TrackListingScreen = ({navigation, route}) => {
 
             if(hasHeadings || (type === 'Album' || type === 'Double')){
                 return(
-                    <SectionList initialNumToRender={15}  bounces={true} style={{height:"50%"}} sections = {organizedListing}
+                    <SectionList initialNumToRender={15}  bounces={true} sections = {organizedListing}
                     keyExtractor = {(item) => {
                         return item.position}
                     }
@@ -143,7 +142,7 @@ export default TrackListingScreen = ({navigation, route}) => {
                 )
             }else{
                 return(
-                    <FlatList initialNumToRender={15} bounces={true} style={{height:"50%"}} data={organizedListing}
+                    <FlatList initialNumToRender={15} bounces={true} data={organizedListing}
                     keyExtractor = {(item) => {return item.position}}
                     renderItem = {(item) => trackItem(item.item)}
                     />
@@ -154,15 +153,15 @@ export default TrackListingScreen = ({navigation, route}) => {
 
     const trackItem = (item) => {
         return(
-            <TouchableOpacity style={{flexDirection : "row",borderWidth : 2, width: "100%", height: 60, justifyContent : "center", backgroundColor : "black"}}>
-                    <View style={{width : "7%", alignItems: "center", justifyContent : "center"}}>
-                        <Text style={{fontWeight: "bold", color: "white"}}>{item.number}</Text>
+            <TouchableOpacity style={styles.trackItem}>
+                    <View style={styles.trackNumberContainer}>
+                        <Text style={styles.trackNumberText}>{item.number}</Text>
                     </View>
-                    <View style={{width : "78%",  justifyContent : "center"}}>
-                        <Text numberOfLines={3} style={{fontSize: 15, color: "white"}}>{item.title}</Text>
+                    <View style={styles.trackNameContainer}>
+                        <Text numberOfLines={3} style={styles.trackNameText}>{item.title}</Text>
                     </View>
-                    <View style={{width : "15%", alignItems : "center", justifyContent : "center"}}>
-                        <Text style={{color: "white"}}>{item.duration}</Text>
+                    <View style={styles.trackDurationContainer}>
+                        <Text style={styles.trackDurationText}>{item.duration}</Text>
                     </View>
            </TouchableOpacity>
         )
@@ -170,20 +169,73 @@ export default TrackListingScreen = ({navigation, route}) => {
 
     const sectionHeader = (item) =>{
         return(
-            <View style = {{height : 30, justifyContent : "center", backgroundColor:"gray"}}>
-                <Text style= {{fontWeight: "bold", fontSize : 22, color: "white"}}>{item.title}</Text>
+            <View style = {styles.sectionHeader}>
+                <Text style= {styles.sectionHeaderText}>{item.title}</Text>
             </View>
         )    }
     
 
     return(
         <View>
-            <View style={{backgroundColor : "black", justifyContent:"center",height:"100%"}}>
+            <View style={styles.listContainer}>
                 {organized ? <TrackList/> : <View></View>}
             </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    trackItem:{
+        flexDirection : "row",
+        borderWidth : 2,
+        width: "100%",
+        height: 60,
+        justifyContent : "center",
+        backgroundColor : "black"
+    },
+    trackNumberContainer:{
+        width : "7%",
+        alignItems: "center",
+        justifyContent : "center"
+    },
+    trackNumberText:{
+        fontWeight: "bold",
+        color: "white"
+    },
+    trackNameContainer:{
+        width : "78%",
+        justifyContent : "center"
+    },
+    trackNameText:{
+        fontSize: 15,
+        color: "white"
+    },
+    trackDurationContainer:{
+        width : "15%",
+        alignItems : "center",
+        justifyContent : "center"
+    },
+    trackDurationText:{
+        color: "white"
+    },
+    sectionHeader: {
+        height : 30,
+        justifyContent : "center",
+        backgroundColor:"gray"
+    },
+    sectionHeaderText:{
+        fontWeight: "bold",
+        fontSize : 22,
+        color: "white"
+    },
+    listContainer:{
+        backgroundColor : "black",
+        justifyContent:"center",
+        height:"100%"
+    }
+})
+
+
 
 /*
                     <SectionList initialNumToRender={15}  bounces={true} style={{height:"50%"}} sections = {organizedListing}

@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text,FlatList} from 'react-native'
-import styles from '../Styles/albumInfoScreen.style.js'
+import {View, Modal,Button,TouchableOpacity,Text,FlatList, StyleSheet} from 'react-native'
 import RateBox from "../Components/RateBox.js";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -15,19 +14,19 @@ export default RateButton = (props) => {
     }
 
     return(
-        <TouchableOpacity style={styles.button} onPress={showBox}>
-            <Modal animationType="fade" transparent={true} visible={menuVisible} onRequestClose={() => {setMenuVisible(!menuVisible)}} style={{"justifyContent":"center", "alignContent":"center"}}>
+        <TouchableOpacity style={props.buttonStyle} onPress={showBox}>
+            <Modal animationType="fade" transparent={true} visible={menuVisible} onRequestClose={() => {setMenuVisible(!menuVisible)}} style={styles.rateBoxWindow}>
                 <RateBox albumItem={props.albumItem} setRating={props.setRating} close={()=> {setMenuVisible(!menuVisible); props.backgroundShade()}}/>
             </Modal>
-            <View style={{flexDirection:'row', 'height': '100%', 'alignItems':'center', 'position':'relative'}}>
-            <View style={{"position":'relative','width':'100%', 'justifyContent':'center','alignItems':'center'}}>
-                <Text style={[{color:'white', 'textAlign':'center'}, props.albumItem['rating'] != null ? {width:'80%'}:{width:'20%'}]}>Rate</Text>
+            <View style={styles.buttonContainer}>
+            <View style={styles.buttonTextContainer}>
+                <Text style={props.textStyle}>Rate</Text>
                 </View>
                 { props.albumItem['rating'] != null ?
-            <View style={{"position":'absolute','width':'90%','justifyContent':'center','alignItems':'flex-end'}}>
-            <View style = {{flexDirection:'column', 'height': '100%', 'justifyContent':'center', 'alignItems' : 'center'}}>
+            <View style={styles.ratingPlacement}>
+            <View style = {styles.ratingContainer}>
                     <Ionicons name={'star'} size={20} color={"white"} />
-                    <Text style={{'color':'white', fontSize:16, fontWeight:'bold', textAlign:'center'}}>{props.albumItem['rating']}</Text>
+                    <Text style={styles.ratingText}>{props.albumItem['rating']}</Text>
                 </View>
                 </View>
                 :null}
@@ -35,6 +34,44 @@ export default RateButton = (props) => {
         </TouchableOpacity>
     );
 }
+
+const styles = StyleSheet.create({
+    rateBoxWindow: {
+        justifyContent:"center",
+        alignContent:"center"
+    },
+    buttonContainer : {
+        flexDirection:"row",
+        height: "100%",
+        alignItems:"center", 
+        position:"relative"
+    },
+    buttonTextContainer:{
+        position:"relative",
+        width:"100%",
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    ratingPlacement:{
+        position:"absolute",
+        width:"90%",
+        justifyContent:"center",
+        alignItems:"flex-end"
+    },
+    ratingContainer:{
+        flexDirection:"column",
+        height:"100%",
+        justifyContent:"center",
+        alignItems : "center"
+    },ratingText:{
+        color:"white",
+        fontSize:16,
+        fontWeight:"bold",
+        textAlign:"center"
+    }
+
+
+})
 
 //            <Modal animationType="fade" transparent={true} visible={menuVisible} onRequestClose={() => {setMenuVisible(!menuVisible)}} style={{"justifyContent":"center", "alignContent":"center"}}>
     //RateBoxWindow

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { AlbumListItem } from "./AlbumListItem.js";
-import { SectionList, View, Text, RefreshControl} from "react-native";
+import { SectionList, View, Text, RefreshControl, StyleSheet} from "react-native";
 import NoResultsList from "./NoResultsList.js";
 import { AlphabetSlider } from "./AlphabetSlider.js";
 import { LoadingScreen } from "../Screens/LoadingScreen.js";
@@ -25,8 +25,8 @@ export const SavedList = (props) => {
 
 
   const sectionHeader = ({ section: { title } }) => (
-    <View style={{"height":21, justifyContent :"center", backgroundColor:"gray"}}>
-      <Text style={{paddingLeft:5, color:"white", fontWeight : "bold"}}>{title}</Text>
+    <View style={styles.sectionHeader}>
+      <Text style={styles.sectionTitle}>{title}</Text>
     </View>
   )
 
@@ -90,10 +90,10 @@ export const SavedList = (props) => {
 
 
     return(
-      <View style={{"flex":1 }}>
+      <View style={styles.flexFill}>
     {props.isLoading === false ? 
-    <View style={{"flex":1 }}>
-    {props.list.length > 0 ? <View style={{"flex":1}}><SectionList refreshControl={<RefreshControl colors={["#D1CDCC"]} tintColor={"#D1CDCC"} refreshing={props.refreshing} onRefresh={()=>{props.onRefresh()}}/>}
+    <View style={styles.flexFill}>
+    {props.list.length > 0 ? <View style={styles.flexFill}><SectionList refreshControl={<RefreshControl colors={["#D1CDCC"]} tintColor={"#D1CDCC"} refreshing={props.refreshing} onRefresh={()=>{props.onRefresh()}}/>}
     initialNumToRender={15}
     onScrollToIndexFailed={()=>{return}}
     ref={listRef}
@@ -103,8 +103,8 @@ export const SavedList = (props) => {
       }
       renderItem={({ item }) => <AlbumListItem album={item} onPress={()=>{props.onPress(item.master_id)}} />}
       renderSectionHeader={sectionHeader}
-    /><View style={{ position:"absolute", right:0, top:50, bottom:50}}>
-      <View style={{height:"100%", justifyContent:"center"}}> 
+    /><View style={styles.alphabetSliderPosition}>
+      <View style={styles.alphabetSlider}> 
     <AlphabetSlider letters={letters} listRef={listRef}/>
     </View>
    </View></View>: <NoResultsList/>}
@@ -116,6 +116,32 @@ export const SavedList = (props) => {
       
     )
 }
+
+const styles = StyleSheet.create({
+  sectionHeader:{
+    height:21,
+    justifyContent :"center",
+    backgroundColor:"gray"
+  },
+  sectionTitle:{
+    paddingLeft:5,
+    color:"white",
+    fontWeight : "bold"
+  },
+  flexFill:{
+    flex: 1
+  },
+  alphabetSliderPosition:{
+    position:"absolute",
+    right:0,
+    top:50,
+    bottom:50
+  },
+  alphabetSlider:{
+    height:"100%",
+    justifyContent:"center"
+  }
+})
 
 /*
 <View style={{"height":21, justifyContent :"center", backgroundColor:"gray"}}>

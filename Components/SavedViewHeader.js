@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Modal, TouchableWithoutFeedback} from 'react-native'
+import {View, Text, TouchableOpacity, Modal, TouchableWithoutFeedback, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react'
 import {SortList} from './MiniList.js'
@@ -14,27 +14,27 @@ export default SavedViewHeader = (props) => {
     const [showSort, setShowSort] = useState(false)
 
     return(
-        <View style={{width:"100%", backgroundColor:"black", height : 65, display : "flex", flexDirection: "row"}}>
-            <View style ={{width: 75, height : "100%", color : "white", justifyContent :"center", alignItems:"center"}}>
-                <TouchableOpacity style={{display:"flex", alignItems: "center", flexDirection:"row"}} onPress={()=>{props.goBack()}}>
+        <View style={styles.header}>
+            <View style ={styles.end}>
+                <TouchableOpacity style={styles.leftArrowContainer} onPress={()=>{props.goBack()}}>
                 <Ionicons name={"chevron-back"} size={30} color={"white"} />
-                    <Text style={{color:"white", fontSize:17}}>Home</Text>
+                    <Text style={styles.optionText}>Home</Text>
                 </TouchableOpacity>
                
             </View>
-            <View style ={{flex:1, height:"100%", alignItems:"center", justifyContent :"center"}}>
-                <Text style={{fontWeight:"bold",color:"white", fontSize :17}}>SavedView</Text>
+            <View style ={styles.centerContainer}>
+                <Text style={styles.centerText}>SavedView</Text>
             </View>
-            <View style ={{width: 75, height : "100%", color : "white", justifyContent :"center", alignItems:"center"}}>
+            <View style ={styles.end}>
                 <TouchableOpacity
                 onPress =  {()=> {
                     setShowSort(!showSort)}}>
-                        <View style={{backgroundColor:"white"}}>
-                        <Modal animationType="fade" transparent={true} visible={showSort} onRequestClose={()=>{setShowSort(!showSort)}} style={{"justifyContent":"center", "alignContent":"center"}}>
+                        <View>
+                        <Modal animationType="fade" transparent={true} visible={showSort} onRequestClose={()=>{setShowSort(!showSort)}} style={styles.sortModal}>
                              <SortList close={()=>{setShowSort(!showSort)}} items={sortItems} sortBy={props.sortBy} setSortBy={props.setSortBy}/>
                             </Modal>
                         </View>
-                    <Text style={{color:"white", fontSize:17}}>Sort</Text>
+                    <Text style={styles.optionText}>Sort</Text>
                 </TouchableOpacity>
                
             </View>
@@ -43,6 +43,47 @@ export default SavedViewHeader = (props) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    header:{
+        width:"100%",
+        backgroundColor:"black",
+        height : 65,
+        display : "flex",
+        flexDirection: "row"
+    },
+    end:{
+        width: 75,
+        height : "100%",
+        color : "white",
+        justifyContent :"center",
+        alignItems:"center" 
+    },
+    leftArrowContainer:{
+        display:"flex",
+        alignItems: "center",
+        flexDirection:"row"
+    },
+    optionText:{
+        color:"white",
+        fontSize:17
+    },
+    centerContainer:{
+        flex:1,
+        height:"100%",
+        alignItems:"center",
+        justifyContent :"center"
+    },
+    centerText:{
+        fontWeight:"bold",
+        color:"white",
+        fontSize :17
+    },
+    sortModal:{
+        justifyContent:"center",
+        alignContent:"center"
+    }
+})
 
 /*
  <View style={{width:"100%", backgroundColor:"black", height : 65, display : "flex", flexDirection: "row"}}>

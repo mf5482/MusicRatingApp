@@ -33,5 +33,8 @@ export default StyleSheet.create({
     resultsList : {
         width: "100%",
         height: "88%"
+    },
+    isLoadingLength:{
+        width:'90%'
     }
 });

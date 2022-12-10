@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react'
-import {View, Text, Button, Modal, TouchableOpacity, SafeAreaView} from 'react-native'
+import {View, Text, Button, Modal, TouchableOpacity, SafeAreaView, StyleSheet} from 'react-native'
 import {ListBar} from '../Components/ListBar.js'
 import {SavedList} from '../Components/SavedList'
 import { getPlaylists, getAlbums, getRatingsList } from '../SQLite/sql.js'
@@ -77,7 +77,7 @@ const SavedViewScreen = ({navigation, route}) => {
     }
 
     return(
-        <SafeAreaView style={{height:"100%",width:"100%",backgroundColor:"black"}}>
+        <SafeAreaView style={styles.container}>
             <SavedViewHeader goBack={goBack} sortBy={sortBy} setSortBy={setSortBy}/>
             <SavedList refreshing={refreshing} onRefresh={onRefresh} isLoading = {isLoading} stopLoading={()=>{setIsLoading(false)}} sortBy={sortBy} id={currentId} list={listItems} onPress={onResultClick}/>
             <ListBar items={lists} returnId={(id) => {setCurrentId(id)}}/>
@@ -86,6 +86,14 @@ const SavedViewScreen = ({navigation, route}) => {
 }
 
 export default SavedViewScreen
+
+const styles = StyleSheet.create({
+    container:{
+        height:"100%",
+        width:"100%",
+        backgroundColor:"black"
+    }
+})
 
 /*        <SafeAreaView style={{height:"100%",width:"100%",backgroundColor:"black"}}>
 */

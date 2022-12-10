@@ -4,7 +4,7 @@ import HomeTab from './Tabs/HomeTab.js'
 import SettingsTab from './Tabs/SettingsTab.js';
 import DiscoverTab from './Tabs/DiscoverTab.js'
 import SearchTab from './Tabs/SearchTab.js'
-import styles from './Styles/Homescreen.style'
+//import styles from './Styles/Homescreen.style'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -19,9 +19,9 @@ export default function App() {
   createTable()
 
   return (
-    <View style={{height:"100%",width:"100%",backgroundColor:"black",}}>
+    <View style={styles.container}>
     <StatusBar translucent backgroundColor="white"barStyle="light-content"/>
-    <SafeAreaView edges={["top", "left", "right"]} style={{flex:1}}>
+    <SafeAreaView edges={["top", "left", "right"]} style={styles.flexFill}>
     <NavigationContainer>
     
       <Tab.Navigator 
@@ -62,6 +62,17 @@ export default function App() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container:{
+    height:"100%",
+    width:"100%",
+    backgroundColor:"black"
+  },
+  flexFill:{
+    flex: 1
+  }
+})
 
 /*    <View style={{height:"100%",width:"100%",backgroundColor:"black",}}>
     <SafeAreaView edges={["top", "left", "right"]} style={{flex:1}}>

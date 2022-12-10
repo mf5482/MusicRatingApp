@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {View, Text, TextInput, Switch, TouchableOpacity, ActivityIndicator} from 'react-native'
 import { searchDiscogs } from '../MusicDatabase/discogs.js'
-import FlatList, { ResultsList } from '../Components/FlatList.js'
 import styles from '../Styles/SearchScreen.style.js'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -75,7 +74,7 @@ const DefaultSearchScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.searchBox}>
-                <TextInput style={[styles.searchBar, isLoading ? {width:"90%"} : ""]}
+                <TextInput style={[styles.searchBar, isLoading ? styles.isLoadingLength : ""]}
                     onChangeText = {(text) =>{
                         onChangeText(text)
                     }} 
