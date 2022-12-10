@@ -1,12 +1,14 @@
 
 import React, { useState,useEffect } from "react";
-import {View, Modal,Button,TouchableOpacity,Text,FlatList, StyleSheet} from 'react-native'
+import {View, Modal,Button,TouchableOpacity, TouchableWithoutFeedback, Text,FlatList, StyleSheet} from 'react-native'
 
 import StarRating from 'react-native-star-rating';
 //import { Slider } from "@rneui/themed";
 import Slider from '@react-native-community/slider';
 
 import { saveAlbumRating, removeAlbumRating } from "../SQLite/sql.js";
+
+import styles from '../Styles/RateBox.style.js'
 
 export default RateBox = (props) => {
 
@@ -61,6 +63,7 @@ export default RateBox = (props) => {
     }
 
     return(
+        <TouchableWithoutFeedback onPress={props.close}>
         <View style = {styles.background}>
         <View style = {styles.boxContainer}>
             <View style={styles.albumInfoContainer}>
@@ -104,10 +107,11 @@ export default RateBox = (props) => {
             </View>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     background:{
         width : "100%",
         height : "100%",
@@ -192,7 +196,7 @@ const styles = StyleSheet.create({
         color:"white"
     }
     
-})
+})*/
 
 /*
         <View style = {{width : "100%",height : "100%", justifyContent : "center", alignItems : "center"}}>

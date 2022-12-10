@@ -4,6 +4,7 @@ import HomeTab from './Tabs/HomeTab.js'
 import SettingsTab from './Tabs/SettingsTab.js';
 import DiscoverTab from './Tabs/DiscoverTab.js'
 import SearchTab from './Tabs/SearchTab.js'
+import styles from "./Styles/App.style.js"
 //import styles from './Styles/Homescreen.style'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -54,8 +55,8 @@ export default function App() {
 
 
       })}>
-        <Tab.Screen name="ListenTab" component={HomeTab}/>
-        <Tab.Screen name="SearchTab" component={SearchTab} options={{headerShown:false}}/>
+        <Tab.Screen name="ListenTab" component={HomeTab} options={{title:"Listen"}}/>
+        <Tab.Screen name="SearchTab" component={SearchTab} options={{headerShown:false, title:"Search"}}/>
       </Tab.Navigator>
     </NavigationContainer>
     </SafeAreaView>
@@ -63,7 +64,7 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container:{
     height:"100%",
     width:"100%",
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
   flexFill:{
     flex: 1
   }
-})
+})*/
 
 /*    <View style={{height:"100%",width:"100%",backgroundColor:"black",}}>
     <SafeAreaView edges={["top", "left", "right"]} style={{flex:1}}>

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import { AlbumListItem } from "./AlbumListItem.js";
+import { AlbumListItem } from "../Components/AlbumListItem.js";
 import { SectionList, View, Text, RefreshControl, StyleSheet} from "react-native";
-import NoResultsList from "./NoResultsList.js";
+import NoResultsList from "../Components/NoResultsList.js";
 import { AlphabetSlider } from "./AlphabetSlider.js";
 import { LoadingScreen } from "../Screens/LoadingScreen.js";
 

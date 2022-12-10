@@ -3,6 +3,7 @@ import { View, Text, Dimensions, TouchableOpacity, Image, ActivityIndicator, Sty
 import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
 import { AlbumListItem } from "./AlbumListItem.js";
 import NoResultsList from "./NoResultsList.js";
+import styles from "../Styles/SearchTab.style.js"
 
 
 /***
@@ -87,11 +88,11 @@ const RecycleTestComponent = (props) => {
 
 export default RecycleTestComponent
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     flexFill:{
         flex:1
     }
-})
+})*/
 
 /*    <View style={{flex:1}}>
 */

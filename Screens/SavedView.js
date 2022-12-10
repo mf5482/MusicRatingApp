@@ -4,6 +4,8 @@ import {ListBar} from '../Components/ListBar.js'
 import {SavedList} from '../Components/SavedList'
 import { getPlaylists, getAlbums, getRatingsList } from '../SQLite/sql.js'
 import SavedViewHeader, {savedViewHeader} from '../Components/SavedViewHeader.js'
+import { SavedViewStyle } from '../Styles/MiscScreenStyles.style.js'
+
 
 
 const SavedViewScreen = ({navigation, route}) => {
@@ -77,7 +79,7 @@ const SavedViewScreen = ({navigation, route}) => {
     }
 
     return(
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={SavedViewStyle.container}>
             <SavedViewHeader goBack={goBack} sortBy={sortBy} setSortBy={setSortBy}/>
             <SavedList refreshing={refreshing} onRefresh={onRefresh} isLoading = {isLoading} stopLoading={()=>{setIsLoading(false)}} sortBy={sortBy} id={currentId} list={listItems} onPress={onResultClick}/>
             <ListBar items={lists} returnId={(id) => {setCurrentId(id)}}/>
@@ -86,14 +88,14 @@ const SavedViewScreen = ({navigation, route}) => {
 }
 
 export default SavedViewScreen
-
+/*
 const styles = StyleSheet.create({
     container:{
         height:"100%",
         width:"100%",
         backgroundColor:"black"
     }
-})
+})*/
 
 /*        <SafeAreaView style={{height:"100%",width:"100%",backgroundColor:"black"}}>
 */

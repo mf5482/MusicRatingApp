@@ -2,9 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import { AlbumListItem } from "./AlbumListItem.js";
 import { SectionList, View, Text, RefreshControl, StyleSheet} from "react-native";
 import NoResultsList from "./NoResultsList.js";
-import { AlphabetSlider } from "./AlphabetSlider.js";
+import { AlphabetSlider } from "../Old/AlphabetSlider.js";
 import { LoadingScreen } from "../Screens/LoadingScreen.js";
 import AlphabetSectionList from "react-native-alphabet-sectionlist/src/AlphabetSectionList.js";
+import styles from '../Styles/SavedList.style.js'
 
 const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','#']
 
@@ -160,7 +161,7 @@ export const SavedList = (props) => {
       
     )*/
 }
-
+/*
 const styles = StyleSheet.create({
   sectionHeader:{
     height:21,
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
   nullSectionHeader:{
     height:0.5
   }
-})
+})*/
 
 /*
 <View style={{"height":21, justifyContent :"center", backgroundColor:"gray"}}>

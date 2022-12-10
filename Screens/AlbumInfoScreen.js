@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {View, Text, Image, TouchableOpacity, ScrollView, StyleSheet} from 'react-native'
-import styles from '../Styles/albumInfoScreen.style.js'
+import styles from '../Styles/AlbumInfoScreen.style.js'
 
 import { getAlbumInfo_LastFM } from '../MusicDatabase/lastfm.js'
 import { searchAlbum_Discogs, getAlbum_Discogs } from '../MusicDatabase/discogs.js'
@@ -75,20 +75,20 @@ const AlbumInfoScreen = ({navigation, route}) => {
     }, [album, artist])
 
     return (
-        <View style={[styles2.background, shadeBackground === true ? styles2.backgroundShade : ""]}>
+        <View style={[styles.background, shadeBackground === true ? styles.backgroundShade : ""]}>
             {discogsMasterId !== '' ? 
             <ScrollView>
-            <View style={styles2.albumImageSection}>
-                <View style={styles2.albumImageContainer}>
-                {albumImageUri != '' ? <Image style={styles2.albumImage} source={{uri:albumImageUri}} /> : 
-<Image style={styles2.albumImage} source={require('../assets/blankCD.jpeg')} />}                
+            <View style={styles.albumImageSection}>
+                <View style={styles.albumImageContainer}>
+                {albumImageUri != '' ? <Image style={styles.albumImage} source={{uri:albumImageUri}} /> : 
+<Image style={styles.albumImage} source={require('../assets/blankCD.jpeg')} />}                
 </View>
             </View>
-                <View style={styles2.albumInfoSection}>
-                    <Text numberOfLines={2} style={styles2.albumTitle}>{album}</Text>
-                    <Text numberOfLines={2} style={styles2.albumArtist}>{artist}</Text>
-                    <Text style={styles2.albumInfoOther}>{releaseYear}</Text>
-                    <Text style={styles2.albumInfoOther}>{genre}</Text>
+                <View style={styles.albumInfoSection}>
+                    <Text numberOfLines={2} style={styles.albumTitle}>{album}</Text>
+                    <Text numberOfLines={2} style={styles.albumArtist}>{artist}</Text>
+                    <Text style={styles.albumInfoOther}>{releaseYear}</Text>
+                    <Text style={styles.albumInfoOther}>{genre}</Text>
                 </View>
                 <View style = {styles.buttons}>
                     <TrackListingButton buttonStyle={styles.button} textStyle={styles.buttonText} onPress = {() => navigation.navigate("TrackListing", {"trackListing":trackListing})}></TrackListingButton>
@@ -104,7 +104,7 @@ const AlbumInfoScreen = ({navigation, route}) => {
 
 
 export default AlbumInfoScreen
-
+/*
 const styles2 = StyleSheet.create({
     background:{
         backgroundColor:"black",
@@ -152,7 +152,7 @@ const styles2 = StyleSheet.create({
         color:"white",
         textAlign : "center"
     }
-})
+})*/
 
 /*
         <View style={[{backgroundColor:"black",height:"100%"}, shadeBackground === true ? {opacity:0.5} : ""]}>

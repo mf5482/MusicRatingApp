@@ -6,6 +6,7 @@ import AlbumInfoScreen from '../Screens/AlbumInfoScreen.js'
 import TrackListingScreen from '../Components/TrackListingScreen.js'
 import AddToScreen from '../Components/AddToScreen.js'
 import SavedViewScreen from '../Screens/SavedView.js';
+import styles from '../Styles/HomeTab.style.js'
 
 import { getAlbums } from '../SQLite/sql.js'
 
@@ -110,7 +111,7 @@ const HomeTab = () => {
             <Stack.Screen name="Home" component={DefaultHomePage} />
             <Stack.Screen name="AlbumInfo" component={AlbumInfoScreen}/>
             <Stack.Screen name="SavedView" component={SavedViewScreen} options={{headerShown:false}}/>
-            <Stack.Screen name="TrackListing" component={TrackListingScreen} />
+            <Stack.Screen name="TrackListing" component={TrackListingScreen} options={{title:"Track Listing"}} />
             <Stack.Screen name="AddToScreen" component={AddToScreen} />
         </Stack.Navigator>
     )
@@ -118,7 +119,7 @@ const HomeTab = () => {
 }
 
 export default HomeTab
-
+/*
 const styles = StyleSheet.create({
     savedViewButton:{
         alignItems: "center",
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     }
 
-})
+})*/
 
 /*
             <TouchableHighlight underlayColor="#d6d5d5" style={{alignItems: "center",justifyContent: "center",borderRadius: 4,width: 150,height:40,backgroundColor: "#f5f5f4",}} onPress={props.onPress}>

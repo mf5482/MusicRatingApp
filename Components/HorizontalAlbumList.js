@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {FlatList, View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native'
-
+import styles from '../Styles/HorizontalAlbumList.style.js'
 
 
 export default HorizontalAlbumList = (props) => {
@@ -36,7 +36,7 @@ export default HorizontalAlbumList = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     albumContainer:{
         height: 145,
         backgroundColor : "#444444",
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     }
     
 
-})
+})*/
 
 //return(<TouchableOpacity style={{height : 145, backgroundColor : "#444444", width:140, alignItems : "center"}} onPress = {() => {props.onPress(item.master_id)}}>
 //AlbumContainer

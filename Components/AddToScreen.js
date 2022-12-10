@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import {View, Modal,Alert,Button,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView, StyleSheet} from 'react-native'
 import { getPlaylists, addToPlaylist } from "../SQLite/sql.js";
-import PlaylistListStyle from "../Styles/PlaylistList.style.js";
+import styles from '../Styles/AddToScreen.style.js'
 
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
@@ -65,8 +65,8 @@ export default addToScreen = ((props) => {
         
 
         return (
-        <TouchableOpacity style={item.item.ID === props.albumItem['playlistId'] ? PlaylistListStyle.playlistItemGreen :PlaylistListStyle.playlistItem} onPress={onPress}>
-            <Text style={PlaylistListStyle.playlistItemText}>{item.item.Name}</Text>
+        <TouchableOpacity style={item.item.ID === props.albumItem['playlistId'] ? styles.playlistItemGreen :styles.playlistItem} onPress={onPress}>
+            <Text style={styles.playlistItemText}>{item.item.Name}</Text>
             <Ionicon name="chevron-forward-sharp" size={25} color="white"/>
         </TouchableOpacity>)
     })
@@ -79,9 +79,9 @@ export default addToScreen = ((props) => {
             <View style={styles.listColor}>
                 <FlatList data={playlists} keyExtractor={(item) => item.ID }
             renderItem={playlistItem} />
-            {props.albumItem['playlistId'] != null ? <TouchableOpacity style={PlaylistListStyle.removeButtonContainer} onPress={showDeleteConfirmBox}>
-            <View style={PlaylistListStyle.removeButton}>
-                <Text style={PlaylistListStyle.removeButtonText}>Remove</Text>
+            {props.albumItem['playlistId'] != null ? <TouchableOpacity style={styles.removeButtonContainer} onPress={showDeleteConfirmBox}>
+            <View style={styles.removeButton}>
+                <Text style={styles.removeButtonText}>Remove</Text>
             </View>
         </TouchableOpacity> : null}           
             <Button title="Close" onPress={props.close} />
@@ -90,7 +90,7 @@ export default addToScreen = ((props) => {
     )
 })
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     addToScreenContainer: {
         height:"100%"
     },
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         backgroundColor: "black"
     }
     
-})
+})*/
 
 //<SafeAreaView style={{height:"100%"}}>
 //AddToScreenContainer

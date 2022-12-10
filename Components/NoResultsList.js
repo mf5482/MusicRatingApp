@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet} from "react-native";
+import styles from '../Styles/NoResultsScreen.style.js'
 
 
 export default NoResultsScreen = () => {
@@ -9,7 +10,7 @@ export default NoResultsScreen = () => {
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     background:{
         height: "100%",
         justifyContent : "center",
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
         paddingBottom : "10%",
         color : "white"
     }
-})
+})*/
 
 /*
         <View style ={{height: "100%", justifyContent : "center", alignItems:"center"}}>

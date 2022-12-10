@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react'
 import {View, Text, TouchableOpacity, Modal, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MiniList from './MiniList.js'
+import styles from '../Styles/ListBar.style.js'
+
 export const ListBar = (props) => {
 
     const isInitialMount = useRef(true);
@@ -77,7 +79,7 @@ export const ListBar = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     listContainer:{
         display:"flex",
         justifyContent:"space-between",
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
         fontSize : 16,
         fontWeight:"bold"
     }
-})
+})*/
 
 /*
         <View style={{display:"flex", justifyContent:"space-between",flexDirection:"row",height:50,width:"100%",backgroundColor:"black"}}>

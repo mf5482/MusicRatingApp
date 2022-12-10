@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-
+import styles from '../Styles/AlbumListItem.style.js'
 
 export const AlbumListItem = (props) => {
 
@@ -18,7 +18,7 @@ export const AlbumListItem = (props) => {
    ); 
     }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     albumPlacement: {
         height:45,
         width:"35%",
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         marginTop:7,
     }
     
-})
+})*/
 
 //      <View style = {{height:45, width:"35%", alignItems : "center"}}>
 //AlbumPlacemement

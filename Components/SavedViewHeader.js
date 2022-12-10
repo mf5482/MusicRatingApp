@@ -2,6 +2,7 @@ import {View, Text, TouchableOpacity, Modal, TouchableWithoutFeedback, StyleShee
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react'
 import {SortList} from './MiniList.js'
+import styles from '../Styles/SavedViewHeader.style.js'
 
 
 export default SavedViewHeader = (props) => {
@@ -23,7 +24,7 @@ export default SavedViewHeader = (props) => {
                
             </View>
             <View style ={styles.centerContainer}>
-                <Text style={styles.centerText}>SavedView</Text>
+                <Text style={styles.centerText}>Saved Albums</Text>
             </View>
             <View style ={styles.end}>
                 <TouchableOpacity
@@ -44,7 +45,7 @@ export default SavedViewHeader = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     header:{
         width:"100%",
         backgroundColor:"black",
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignContent:"center"
     }
-})
+})*/
 
 /*
  <View style={{width:"100%", backgroundColor:"black", height : 65, display : "flex", flexDirection: "row"}}>

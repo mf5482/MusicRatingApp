@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from "react";
 import {View, Modal,Button,TouchableOpacity,Text,FlatList, TouchableWithoutFeedback, SafeAreaView, StyleSheet} from 'react-native'
 import { getPlaylists, addToPlaylist } from "../SQLite/sql.js";
-import PlaylistListStyle from "../Styles/PlaylistList.style.js";
+import styles from '../Styles/MiniList.style.js'
+
 
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
@@ -81,7 +82,7 @@ export const SortList = (props) => {
         </SafeAreaView>
     )
 }
-
+/*
 const styles = StyleSheet.create({
     listItem:{
         height:40,
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     }
     
 
-})
+})*/
 
 /*
         <TouchableOpacity style={{height:40, width: "100%", justifyContent:"center", alignItems : "center"}} onPress={()=>onPress(item.index)}>

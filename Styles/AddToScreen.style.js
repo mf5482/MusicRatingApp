@@ -1,6 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    addToScreenContainer: {
+        height:"100%"
+    },
+    backgroundDim : {
+        flex: 1,
+        backgroundColor:"rgba(0,0,0,0.5)"
+    },
+    listColor : {
+        backgroundColor: "black"
+    },
     playlistItem:{
         display : "flex",
         height : 70,
@@ -55,4 +65,5 @@ export default StyleSheet.create({
     removeButtonContainer:{
         alignItems:"center"
     }
+    
 })

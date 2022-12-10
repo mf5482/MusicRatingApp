@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import {View, Modal,Button,TouchableOpacity,Text,FlatList, StyleSheet} from 'react-native'
 import RateBox from "../Components/RateBox.js";
+import styles from '../Styles/RateButton.style.js'
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -35,7 +36,7 @@ export default RateButton = (props) => {
     );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     rateBoxWindow: {
         justifyContent:"center",
         alignContent:"center"
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     }
 
 
-})
+})*/
 
 //            <Modal animationType="fade" transparent={true} visible={menuVisible} onRequestClose={() => {setMenuVisible(!menuVisible)}} style={{"justifyContent":"center", "alignContent":"center"}}>
     //RateBoxWindow

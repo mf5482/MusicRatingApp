@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import {View, Text, TextInput, Switch, TouchableOpacity, ActivityIndicator} from 'react-native'
 import { searchDiscogs } from '../MusicDatabase/discogs.js'
-import styles from '../Styles/SearchScreen.style.js'
+import styles from '../Styles/SearchTab.style.js'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AlbumInfoScreen from '../Screens/AlbumInfoScreen.js'
@@ -111,7 +111,7 @@ const SearchTab = () => {
         })}>
             <Stack.Screen name="Search" component={DefaultSearchScreen} />
             <Stack.Screen name="AlbumInfo" component={AlbumInfoScreen}/>
-            <Stack.Screen name="TrackListing" component={TrackListingScreen} />
+            <Stack.Screen name="TrackListing" component={TrackListingScreen} options={{title:"Track Listing"}} />
             <Stack.Screen name="AddToScreen" component={AddToScreen} />
         </Stack.Navigator>
     )
