@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Dimensions} from 'react-native'
 
 export default StyleSheet.create({
     container : {
@@ -18,24 +18,36 @@ export default StyleSheet.create({
     },
 
     clearIcon : {
-        width : "10%"
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        marginLeft:10
+    },
+
+    clearButton:{
+        width:20,
+        height:20,
+        borderRadius: Math.round(Dimensions.get('window').width + Dimensions.get('window').height) / 2,
+        backgroundColor:"gray",
+        justifyContent:"center",
+        alignItems:"center",
+        marginLeft:5
     },
 
     searchBar : {
-        width: "100%",
         height: 40,
-        justifyContent : "flex-start",
+        justifyContent : "space-between",
         backgroundColor: "white",
         borderRadius : 10,
-        padding : 10
+        padding : 10,
+        display:"flex",
+        flex:1,
+        flexDirection : "row"
     },
 
     resultsList : {
         width: "100%",
         height: "88%"
-    },
-    isLoadingLength:{
-        width:'90%'
     },
     flexFill:{
         flex:1
