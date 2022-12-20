@@ -64,6 +64,7 @@ export default RateBox = (props) => {
     return(
         <TouchableWithoutFeedback onPress={props.close}>
         <View style = {styles.background}>
+            <TouchableWithoutFeedback>
         <View style = {styles.boxContainer}>
             <View style={styles.albumInfoContainer}>
                 <Text numberOfLines={1} style={styles.albumTitle}>{props.albumItem["album"]}</Text>
@@ -105,6 +106,7 @@ export default RateBox = (props) => {
                 </View>
             </View>
             </View>
+            </TouchableWithoutFeedback>
         </View>
         </TouchableWithoutFeedback>
     );
