@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
-import {View, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native'
+import {View, TextInput, TouchableOpacity, ActivityIndicator, Dimensions} from 'react-native'
 import { searchDiscogs } from '../MusicDatabase/discogs.js'
 import styles from '../Styles/SearchTab.style.js'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -7,10 +7,11 @@ import AlbumInfoScreen from '../Screens/AlbumInfoScreen.js'
 import SearchResults from '../Components/SearchResults.js'
 import TrackListingScreen from '../Components/TrackListingScreen.js'
 import AddToScreen from '../Components/AddToScreen.js'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {DataProvider} from "recyclerlistview";
 
-
+//close-outline
 const Stack = createNativeStackNavigator();
 var run = 0
 var hit = 0
@@ -73,14 +74,19 @@ const DefaultSearchScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.searchBox}>
-                <TextInput style={[styles.searchBar, isLoading ? styles.isLoadingLength : ""]}
+                <View style={styles.searchBar}>
+                <TextInput style={styles.flexFill}
                     onChangeText = {(text) =>{
                         onChangeText(text)
                     }} 
-                    clearButtonMode={"while-editing"}
                     placeholder = {"Search Albums"}
                     value = {text}
-                />
+                />{text.length > 0 ?<TouchableOpacity onPress={()=>{onChangeText("")}}>
+                    <View style={styles.clearButton}>
+                        <Ionicons name={'close-outline'} size={15} color={"white"} />
+                    </View>
+                </TouchableOpacity>:<></>}
+                </View>
                 {isLoading && <TouchableOpacity style = {styles.clearIcon}>
                     <ActivityIndicator color ={"#ffffff"}/>
 </TouchableOpacity>}
