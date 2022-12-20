@@ -3,7 +3,8 @@ import React, { useState,useEffect } from "react";
 import {View,TouchableOpacity, TouchableWithoutFeedback, Text,} from 'react-native'
 
 import StarRating from 'react-native-star-rating';
-import Slider from '@react-native-community/slider';
+//import Slider from '@react-native-community/slider';
+import {Slider} from '@miblanchard/react-native-slider'
 
 import { saveAlbumRating, removeAlbumRating } from "../SQLite/sql.js";
 
@@ -11,16 +12,16 @@ import styles from '../Styles/RateBox.style.js'
 
 export default RateBox = (props) => {
 
-    const [rating, setCurrentRating] =  useState(props.albumItem['rating'])
+    const [rating, setCurrentRating] =  useState(2.5)
 
     useEffect (() => {
-        if(rating === null || rating === undefined){
-            setCurrentRating(2.5)
+        if(props.albumItem['rating'] !== null && props.albumItem['rating'] !== undefined){
+            setCurrentRating(props.albumItem['rating'])
         }
-    }, [rating])
+    }, [props.albumItem['rating']])
 
     const onSlideChange = (r) => {
-        setCurrentRating(r)
+        setCurrentRating(r[0])
     }
 
     const saveRating = async () => {
@@ -76,8 +77,10 @@ export default RateBox = (props) => {
                         <StarRating rating={rating} halfStarEnabled={true}  disabled={true} fullStarColor="yellow"></StarRating>
                     </View>
                     <View style={styles.sliderLayer}>
-                        <Slider style={styles.slider} thumbStyle={styles.thumbStyle} value={rating} tapToSeek={true} minimumValue={0} maximumValue={5} step={0.5} onValueChange={onSlideChange} trackStyle="blue"/>
-                    </View>
+                        
+                        <Slider containerStyle={styles.slider} thumbStyle={styles.thumbStyle} value={rating} trackClickable={true} minimumValue={0} maximumValue={5} step={0.5} onValueChange={onSlideChange} trackStyle="blue"/>
+                        
+                        </View>
                 </View>
             </View>
             <View style={styles.buttonsContainer}>
