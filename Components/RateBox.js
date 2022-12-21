@@ -1,13 +1,9 @@
 
 import React, { useState,useEffect } from "react";
 import {View,TouchableOpacity, TouchableWithoutFeedback, Text,} from 'react-native'
-
 import StarRating from 'react-native-star-rating';
-//import Slider from '@react-native-community/slider';
 import {Slider} from '@miblanchard/react-native-slider'
-
 import { saveAlbumRating, removeAlbumRating } from "../SQLite/sql.js";
-
 import styles from '../Styles/RateBox.style.js'
 
 export default RateBox = (props) => {

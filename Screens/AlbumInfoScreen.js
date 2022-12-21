@@ -15,7 +15,6 @@ import ErrorAlert from '../Components/ErrorAlert.js'
 //const AlbumInfoScreen = ({navigation, route}) => {
 const AlbumInfoScreen = ({navigation, route}) => {
 
-    const isInitialMount = useRef(true);
 
     const [artist, changeArtist] = useState('')
     const [album, changeAlbum] = useState('')
@@ -23,7 +22,6 @@ const AlbumInfoScreen = ({navigation, route}) => {
     const [albumImageUri, changeAlbumImageUri] = useState('')
     const [genre, changeGenre] = useState('')
     const [trackListing, changeTrackListing] = useState([])
-    const [addToIsActive, setAddToIsActive] = useState(false)
     const [playlistID, setPlaylistID] = useState(null)
     const [playlistName, setPlaylistName] = useState(null)
     const [rating, setRating] = useState(null)
@@ -44,7 +42,6 @@ const AlbumInfoScreen = ({navigation, route}) => {
         do{
            try{
             q = await getAlbum_Discogs(route.params.masterId)
-            console.log(q)
 
            }catch(err){
             console.log(err)
