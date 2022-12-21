@@ -8,6 +8,7 @@ import AddToButton from '../Buttons/AddToButton.js'
 import RatingButton from '../Buttons/RateButton.js'
 import TrackListingButton from '../Buttons/TrackListingButton.js'
 import { LoadingScreen } from './LoadingScreen.js'
+import ErrorAlert from '../Components/ErrorAlert.js'
 
 
 
@@ -37,16 +38,24 @@ const AlbumInfoScreen = ({navigation, route}) => {
 
     useEffect (async () => {
 
-        const q = await getAlbum_Discogs(route.params.masterId)
+        let retry = false
+        let q = undefined
 
-        /*const p = await getAlbumInfo_LastFM('Tom Petty and The Heartbreakers', 'Tom Petty and The Heartbreakers')
-        const q = await searchAlbum_Discogs('Tom Petty and The Heartbreakers', 'Tom Petty and The Heartbreakers')
-*/
-        /*const p = await getAlbumInfo_LastFM('Billy Joel', 'The Essential Billy Joel')
-        const q = await searchAlbum_Discogs('Billy Joel', 'The Essential Billy Joel')
-        */
-        /*const p = await getAlbumInfo_LastFM('Kanye West', 'Donda')
-        const q = await searchAlbum_Discogs('Kanye West', 'Donda') */
+        do{
+           try{
+            q = await getAlbum_Discogs(route.params.masterId)
+            console.log(q)
+
+           }catch(err){
+            console.log(err)
+            retry = await ErrorAlert()
+           } 
+
+        }while(retry !== false)
+
+        if(retry === false && q === undefined){
+            navigation.goBack()
+        }else{
 
         const discogsData = q.data
         
@@ -57,6 +66,7 @@ const AlbumInfoScreen = ({navigation, route}) => {
         changeGenre(discogsData.genres[0])
         changeTrackListing(discogsData.tracklist)
         setDiscogsMasterId(discogsData.master_id)
+        }
 
     }, [])
 

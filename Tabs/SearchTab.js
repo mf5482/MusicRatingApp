@@ -8,6 +8,7 @@ import SearchResults from '../Components/SearchResults.js'
 import TrackListingScreen from '../Components/TrackListingScreen.js'
 import AddToScreen from '../Components/AddToScreen.js'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ErrorAlert from '../Components/ErrorAlert.js';
 
 import {DataProvider} from "recyclerlistview";
 
@@ -29,6 +30,23 @@ const DefaultSearchScreen = ({navigation}) => {
     });
 
     const [dataProvider, setDataProvider] = useState(dp.cloneWithRows([]))
+
+    const search = async () => {
+        setIsLoading(true)
+        hit++
+        let response = null
+        try{
+            response = await searchDiscogs(text)   
+        }catch(err){
+            console.log(err)
+            ErrorAlert()
+        }
+        if(response !== null ){
+            setDataProvider(dp.cloneWithRows(response.data.results))
+            setHasResults(true)
+        }
+        setIsLoading(false)
+    }
     
 
     useEffect (() => {
@@ -41,10 +59,23 @@ const DefaultSearchScreen = ({navigation}) => {
             if(text.length > 0){
                 setIsLoading(true)
                 hit++
-                const response = await searchDiscogs(text)
+                var retry = false
+                let response = null
+                do{
+                try{
+                    response = await searchDiscogs(text)   
+                }catch(err){
+                    console.log(err)
+                    retry = await ErrorAlert(null)
+                }
+            }while(retry !== false)
+
+                if(response !== null ){
+                    setDataProvider(dp.cloneWithRows(response.data.results))
+                    setHasResults(true)
+                }
                 setIsLoading(false)
-                setDataProvider(dp.cloneWithRows(response.data.results))
-                setHasResults(true)
+                
             }
 
         }, 1000)
