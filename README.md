@@ -40,3 +40,13 @@ React Native, JavaScript, HTML, CSS, Axios API Client
 iOS - ```npm run ios```\
 Android - ```npm run android```
 
+## Images
+
+<img src="https://user-images.githubusercontent.com/79879438/210457733-d0ab5576-262a-47b1-b1c2-a59e9bc3d253.png" alt="drawing" width="200"/>
+
+<img src="https://user-images.githubusercontent.com/79879438/210458059-6d7dd9a2-0761-44ad-90e8-9c7dfa35bf89.png" alt="drawing" width="200"/>
+
+<img src="https://user-images.githubusercontent.com/79879438/210458122-38774658-b7fa-47a4-8061-a6451065b377.png" alt="drawing" width="200"/>
+
+<img src="https://user-images.githubusercontent.com/79879438/210458272-e1768e2a-227f-4da3-863c-5a1ab8fbf009.png" alt="drawing" width="200"/>
+
