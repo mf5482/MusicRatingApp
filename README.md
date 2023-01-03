@@ -6,7 +6,7 @@
 I am an enjoyer of music, and being one, I have sought out recommendations for new music, both from friends and from the Internet. Over time, hundreds of albums have been added to my “To Listen List,” and the sheer amount has led to difficulty organizing which albums I have already listened to and what my thoughts were for each. With this app, users can search and save albums to predefined playlists based on the stages of the “album familiarization” process: Listen To, Relisten, Wishlist, Owned, and Discard Pile. Additionally, users can rate albums for the purpose of providing very basic estimations of their initial album listens.
 
 ## Technologies Used
-React Native, JavaScript, HTML, CSS, Axios API Client
+React Native, JavaScript, HTML, CSS, SQLite, Axios API Client
 
 ## Requirements To Run
 * Node.JS & NPM
