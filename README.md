@@ -11,6 +11,7 @@ React Native, JavaScript, HTML, CSS, SQLite, Axios API Client
 
 ## Requirements To Run
 * Node.JS & NPM
+
   React Native relies on Node.JS and its package manager, npm, in order to function. If not already installed, download Node.JS and npm using the link at the end of this paragraph. Once completed, run the following commands in your command prompt to verify its installation:
   
    ```
