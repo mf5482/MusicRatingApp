@@ -40,5 +40,10 @@ React Native, JavaScript, HTML, CSS, SQLite, Axios API Client
 iOS - ```npm run ios```\
 Android - ```npm run android```
 
+## How To Use
+  Using the Search Tab, you can search for albums - use the album’s exact title and artist for best results. When you click on one of the returned results, you can then view the album’s track listing, add it to one of the five predefined playlists, or give it a rating.
+
+  Using the Listen Tab, you can view the albums that you have saved. The two windows on the tab’s main page will be filled with random albums from your Listen To and Relisten playlists respectively. Click on one of the buttons below these windows to view all of your albums organized either by playlist or rating. Jump to certain albums using the alphabetical slider on the right side of the screen. Sort your albums by either album title or artist at the top of the page. Hold down the name of the list at the bottom of the screen to easily jump to other lists.
+
 ## Images
 <img src="https://user-images.githubusercontent.com/79879438/210457733-d0ab5576-262a-47b1-b1c2-a59e9bc3d253.png" alt="drawing" width="200"/>  <img src="https://user-images.githubusercontent.com/79879438/210458059-6d7dd9a2-0761-44ad-90e8-9c7dfa35bf89.png" alt="drawing" width="200"/>  <img src="https://user-images.githubusercontent.com/79879438/210458122-38774658-b7fa-47a4-8061-a6451065b377.png" alt="drawing" width="200"/>  <img src="https://user-images.githubusercontent.com/79879438/210458272-e1768e2a-227f-4da3-863c-5a1ab8fbf009.png" alt="drawing" width="200"/>
